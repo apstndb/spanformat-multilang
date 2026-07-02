@@ -65,7 +65,7 @@ No GCP credentials are required when `SPANNER_EMULATOR_HOST` is set.
 | PHP | `cd examples/php && composer install && SPANNER_EMULATOR_HOST=localhost:9010 php query_format.php` |
 | C# | `cd examples/csharp && SPANNER_EMULATOR_HOST=localhost:9010 dotnet run` |
 | Rust | `cd examples/rust && SPANNER_EMULATOR_HOST=localhost:9010 cargo run` |
-| C++ | `cd examples/cpp && cmake -B build && cmake --build build && SPANNER_EMULATOR_HOST=localhost:9010 ./build/query_format` |
+| C++ | See [`cpp/README.md`](cpp/README.md) — vcpkg + `google-cloud-cpp[spanner]`, then `SPANNER_EMULATOR_HOST=localhost:9010 ./build/query_format` |
 
 Expected output (similar across languages):
 
@@ -81,7 +81,7 @@ format_result_row: ["1", "hello", "true"]
 - **C#** — set `EmulatorDetection = EmulatorOnly` and `EnableGetSchemaTable = true` on `SpannerConnectionStringBuilder`; read `SpannerDbType` from `GetSchemaTable()` and use typed `SpannerDataReader` accessors.
 - **Rust** — uses `google-cloud-spanner` with `NativeValue` wrappers for column values.
 - **C++** — the high-level `RowStream` does not expose `ResultSetMetadata`; the example documents wire types equivalent to metadata for this fixed `SELECT` and still runs the query through `google::cloud::spanner::Client`.
-- **C++** additionally requires [google-cloud-cpp](https://github.com/googleapis/google-cloud-cpp) with the Spanner component installed (`find_package(google_cloud_cpp_spanner)`).
+- **C++** — install [google-cloud-cpp](https://github.com/googleapis/google-cloud-cpp) Spanner via [vcpkg](https://vcpkg.io/) (`vcpkg.json` in `examples/cpp/`). See [`cpp/README.md`](cpp/README.md).
 - **PHP** requires the `ext-grpc` and `ext-intl` extensions (`pecl install grpc` or your OS package).
 - **Ruby** on 3.4+/4.0+ may need explicit `mutex_m` and `fiddle` gems (see `examples/ruby/Gemfile`).
 

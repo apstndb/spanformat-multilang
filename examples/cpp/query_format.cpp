@@ -16,7 +16,6 @@
 #include "google/spanner/v1/type.pb.h"
 #include <nlohmann/json.hpp>
 #include <spanvalue/encoder.hpp>
-#include <spanvalue/format.hpp>
 #include <spanvalue/proto_adapt.hpp>
 
 namespace spanner = ::google::cloud::spanner;
@@ -50,10 +49,8 @@ int main() {
   const std::string project_id = env_or("SPANNER_PROJECT_ID", "test-project");
   const std::string instance_id = env_or("SPANNER_INSTANCE_ID", "test-instance");
   const std::string database_id = env_or("SPANNER_DATABASE_ID", "test-db");
-  const std::string database_name = "projects/" + project_id + "/instances/" +
-                                    instance_id + "/databases/" + database_id;
-
-  spanner::Client client(spanner::MakeConnection(spanner::Database(database_name)));
+  spanner::Database database(project_id, instance_id, database_id);
+  spanner::Client client(spanner::MakeConnection(database));
 
   spanner::SqlStatement sql("SELECT 1 AS n, 'hello' AS s, true AS b");
   auto rows = client.ExecuteQuery(sql);
