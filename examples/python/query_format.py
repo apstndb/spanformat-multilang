@@ -31,10 +31,15 @@ def main() -> int:
 
     with database.snapshot() as snapshot:
         result_set = snapshot.execute_sql(SQL)
-        fields = result_set.metadata.row_type.fields
-        col_types = [adapt_client_type(field.type) for field in fields]
+        rows = list(result_set)
+        if not rows:
+            print("Query returned no rows.", file=sys.stderr)
+            return 1
 
-        for row in result_set:
+        fields = result_set.metadata.row_type.fields
+        col_types = [adapt_client_type(field.type_) for field in fields]
+
+        for row in rows:
             native_values = list(row)
 
             # Full path for column 0: metadata type → adapt → encode → format cell

@@ -10,6 +10,17 @@ set -euo pipefail
 
 export SPANNER_EMULATOR_HOST
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -n "${SPANNER_EMULATOR_HOST}" ]]; then
+  echo "Emulator: ${SPANNER_EMULATOR_HOST}"
+  echo "Project:  ${SPANNER_PROJECT_ID}"
+  echo "Instance: ${SPANNER_INSTANCE_ID}"
+  echo "Database: ${SPANNER_DATABASE_ID}"
+  python3 "${SCRIPT_DIR}/bootstrap-emulator.py"
+  echo "Ready: projects/${SPANNER_PROJECT_ID}/instances/${SPANNER_INSTANCE_ID}/databases/${SPANNER_DATABASE_ID}"
+  exit 0
+fi
+
 echo "Emulator: ${SPANNER_EMULATOR_HOST}"
 echo "Project:  ${SPANNER_PROJECT_ID}"
 echo "Instance: ${SPANNER_INSTANCE_ID}"

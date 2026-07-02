@@ -23,16 +23,16 @@ const spanner = new Spanner({ projectId });
 const database = spanner.instance(instanceId).database(databaseId);
 const config = simpleFormatConfig();
 
-const [rows, , response] = await database.run({ sql: SQL });
+const [rows, , response] = await database.run({ sql: SQL, json: true });
 if (rows.length === 0) {
   console.error('Query returned no rows.');
   process.exit(1);
 }
 
-const fields = response.metadata.rowType.fields;
+const fields = response.rowType.fields;
 const colTypes = fields.map((field) => adaptClientType(field.type));
 const row = rows[0];
-const nativeValues = fields.map((_, index) => row[index]);
+const nativeValues = fields.map((field) => row[field.name]);
 
 const wireValue = encodeValue(colTypes[0], nativeValues[0]);
 console.log(`encodeValue (n): ${JSON.stringify(wireValue)}`);

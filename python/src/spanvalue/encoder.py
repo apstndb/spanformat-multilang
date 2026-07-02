@@ -175,7 +175,7 @@ def _type_to_wire_dict(typ: Any) -> dict[str, Any]:
         elem = getattr(typ, "arrayElementType", None)
     if elem is None:
         elem = getattr(typ, "arrayElementType", None)
-    if elem is not None:
+    if elem:
         out["array_element_type"] = _type_to_wire_dict(elem)
 
     struct_type = getattr(typ, "struct_type", None)
@@ -183,7 +183,7 @@ def _type_to_wire_dict(typ: Any) -> dict[str, Any]:
         struct_type = getattr(typ, "structType", None)
     if struct_type is None:
         struct_type = getattr(typ, "StructType", None)
-    if struct_type is not None:
+    if struct_type:
         fields = getattr(struct_type, "fields", None)
         if fields is None:
             fields = getattr(struct_type, "Fields", [])
