@@ -18,18 +18,20 @@ SELECT 1 AS n, 'hello' AS s, true AS b
 
 ## Prerequisites
 
-### 1. Start the emulator
+### 1. Start the emulator (Docker recommended)
 
-**gcloud** (included in [Google Cloud SDK](https://cloud.google.com/sdk)):
+**Docker** (works without `gcloud`):
+
+```bash
+docker run -d --name spanner-emulator \
+  -p 9010:9010 -p 9020:9020 \
+  gcr.io/cloud-spanner-emulator/emulator:latest
+```
+
+**gcloud** (optional; requires [Google Cloud SDK](https://cloud.google.com/sdk)):
 
 ```bash
 gcloud emulators spanner start
-```
-
-**Docker**:
-
-```bash
-docker run -p 9010:9010 -p 9020:9020 gcr.io/cloud-spanner-emulator/emulator
 ```
 
 ### 2. Bootstrap instance and database (one time)
@@ -41,7 +43,7 @@ export SPANNER_EMULATOR_HOST=localhost:9010
 ./examples/setup-emulator.sh
 ```
 
-Defaults (override with env vars):
+`setup-emulator.sh` uses Python + `google-cloud-spanner` when `SPANNER_EMULATOR_HOST` is set (no `gcloud` required). Override defaults with env vars:
 
 | Variable | Default |
 |---|---|
@@ -57,11 +59,11 @@ No GCP credentials are required when `SPANNER_EMULATOR_HOST` is set.
 | Language | Command |
 |---|---|
 | Python | `cd examples/python && pip install -r requirements.txt && SPANNER_EMULATOR_HOST=localhost:9010 python query_format.py` |
-| Java | `cd java && mvn -q install -DskipTests && cd ../examples/java && mvn -q -DskipTests package exec:java` |
-| Node.js | `cd examples/nodejs && npm install && SPANNER_EMULATOR_HOST=localhost:9010 node query_format.mjs` |
+| Java | `cd java && mvn -q install -DskipTests && cd ../examples/java && SPANNER_EMULATOR_HOST=localhost:9010 mvn -q -DskipTests exec:java` |
+| Node.js | `cd examples/nodejs && npm ci && SPANNER_EMULATOR_HOST=localhost:9010 node query_format.mjs` |
 | Ruby | `cd examples/ruby && bundle install && SPANNER_EMULATOR_HOST=localhost:9010 bundle exec ruby query_format.rb` |
 | PHP | `cd examples/php && composer install && SPANNER_EMULATOR_HOST=localhost:9010 php query_format.php` |
-| C# | `cd examples/csharp && dotnet run` |
+| C# | `cd examples/csharp && SPANNER_EMULATOR_HOST=localhost:9010 dotnet run` |
 | Rust | `cd examples/rust && SPANNER_EMULATOR_HOST=localhost:9010 cargo run` |
 | C++ | `cd examples/cpp && cmake -B build && cmake --build build && SPANNER_EMULATOR_HOST=localhost:9010 ./build/query_format` |
 
@@ -74,9 +76,14 @@ format_result_row: ["1", "hello", "true"]
 
 ## Per-language notes
 
-- **Python / Java / Node / Ruby / PHP / C# / Rust** — column types come from official client result metadata.
+- **Python / Node / Ruby / PHP** — column types from official client result metadata (`row_type.fields` or equivalent).
+- **Java** — `ResultSet#getValue` returns wire protobuf `Value`; use typed accessors (`getLong`, `getString`, `getBoolean`, …) for native values passed to `encodeValue`.
+- **C#** — set `EmulatorDetection = EmulatorOnly` and `EnableGetSchemaTable = true` on `SpannerConnectionStringBuilder`; read `SpannerDbType` from `GetSchemaTable()` and use typed `SpannerDataReader` accessors.
+- **Rust** — uses `google-cloud-spanner` with `NativeValue` wrappers for column values.
 - **C++** — the high-level `RowStream` does not expose `ResultSetMetadata`; the example documents wire types equivalent to metadata for this fixed `SELECT` and still runs the query through `google::cloud::spanner::Client`.
 - **C++** additionally requires [google-cloud-cpp](https://github.com/googleapis/google-cloud-cpp) with the Spanner component installed (`find_package(google_cloud_cpp_spanner)`).
+- **PHP** requires the `ext-grpc` and `ext-intl` extensions (`pecl install grpc` or your OS package).
+- **Ruby** on 3.4+/4.0+ may need explicit `mutex_m` and `fiddle` gems (see `examples/ruby/Gemfile`).
 
 ## CI
 
@@ -87,6 +94,7 @@ Core library conformance tests run in CI on every push. These emulator examples 
 ```
 examples/
   setup-emulator.sh
+  bootstrap-emulator.py
   python/query_format.py
   java/...
   nodejs/query_format.mjs

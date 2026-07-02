@@ -7,12 +7,18 @@ import com.google.cloud.spanner.ResultSet;
 import com.google.cloud.spanner.Spanner;
 import com.google.cloud.spanner.SpannerOptions;
 import com.google.cloud.spanner.Statement;
+import com.google.cloud.spanner.Type;
 import com.google.protobuf.Value;
-import com.google.spanner.v1.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Run a literal SELECT on the Spanner emulator and format cells with spanvalue. */
+/**
+ * Run a literal SELECT on the Spanner emulator and format cells with spanvalue.
+ *
+ * <p>ResultSet#getValue returns wire protobuf {@link Value} messages. spanvalue encoders expect
+ * native Java values (e.g. {@link Long}, {@link String}, {@link Boolean}), so use the typed
+ * accessors below.
+ */
 public final class QueryFormatExample {
   private static final String SQL = "SELECT 1 AS n, 'hello' AS s, true AS b";
 
@@ -37,9 +43,9 @@ public final class QueryFormatExample {
         List<Object> types = new ArrayList<>();
         List<Object> values = new ArrayList<>();
         for (int i = 0; i < rs.getColumnCount(); i++) {
-          Type wireType = SpanValue.adaptClientType(rs.getColumnType(i));
-          types.add(wireType);
-          values.add(rs.getValue(i));
+          Type columnType = rs.getColumnType(i);
+          types.add(SpanValue.adaptClientType(columnType));
+          values.add(nativeValue(rs, i, columnType));
         }
 
         Value encoded = SpanValue.encodeValue(types.get(0), values.get(0));
@@ -55,5 +61,27 @@ public final class QueryFormatExample {
   private static String env(String key, String defaultValue) {
     String value = System.getenv(key);
     return value == null || value.isBlank() ? defaultValue : value;
+  }
+
+  /** Decode a column to the native value spanvalue encoders expect (not wire protobuf Value). */
+  private static Object nativeValue(ResultSet rs, int index, Type columnType) {
+    if (rs.isNull(index)) {
+      return null;
+    }
+    return switch (columnType.getCode()) {
+      case BOOL -> rs.getBoolean(index);
+      case INT64 -> rs.getLong(index);
+      case STRING -> rs.getString(index);
+      case FLOAT64 -> rs.getDouble(index);
+      case FLOAT32 -> rs.getFloat(index);
+      case BYTES -> rs.getBytes(index).toByteArray();
+      case TIMESTAMP -> rs.getTimestamp(index);
+      case DATE -> rs.getDate(index);
+      case JSON, ENUM, PROTO -> rs.getJson(index);
+      case NUMERIC -> rs.getBigDecimal(index);
+      case UUID -> rs.getUuid(index);
+      case INTERVAL -> rs.getInterval(index);
+      default -> rs.getValue(index);
+    };
   }
 }

@@ -247,10 +247,11 @@ public static class ValueEncoder
         var codeObj = codeProp?.GetValue(dbType);
         var code = codeObj switch
         {
-            null => (int)TypeCode.TypeCodeUnspecified,
-            int i => i,
-            Enum e => Convert.ToInt32(e, CultureInfo.InvariantCulture),
-            _ => Codes.ParseTypeCode(codeObj),
+            null => ParseSpannerDbTypeCode(dbType),
+            int i when i != 0 => i,
+            Enum e when Convert.ToInt32(e, CultureInfo.InvariantCulture) != 0 =>
+                Convert.ToInt32(e, CultureInfo.InvariantCulture),
+            _ => ParseSpannerDbTypeCode(dbType),
         };
 
         var dict = new Dictionary<string, object?>
@@ -279,5 +280,17 @@ public static class ValueEncoder
         }
 
         return dict;
+    }
+
+    private static int ParseSpannerDbTypeCode(object dbType)
+    {
+        var label = dbType.ToString() ?? "";
+        return label switch
+        {
+            "JSONB{PG}" => (int)TypeCode.Json,
+            "NUMERIC{PG}" => (int)TypeCode.Numeric,
+            "OID{PG}" => (int)TypeCode.Enum,
+            _ => Codes.ParseTypeCode(label),
+        };
     }
 }

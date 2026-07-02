@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
 
+# google-cloud-spanner still requires mutex_m, which Ruby 3.4+ no longer bundles.
+gem 'mutex_m'
+# spanvalue uses fiddle for float formatting; Ruby 4.0+ no longer bundles it.
+gem 'fiddle'
 gem 'google-cloud-spanner', '~> 2.0'
 gem 'spanvalue', path: '../../ruby'

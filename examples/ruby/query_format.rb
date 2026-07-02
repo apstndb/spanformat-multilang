@@ -14,12 +14,12 @@ project_id = ENV.fetch('SPANNER_PROJECT_ID', 'test-project')
 instance_id = ENV.fetch('SPANNER_INSTANCE_ID', 'test-instance')
 database_id = ENV.fetch('SPANNER_DATABASE_ID', 'test-db')
 
-client = Google::Cloud::Spanner.new project: project_id
-database = client.instance(instance_id).database database_id
+spanner = Google::Cloud::Spanner.new project: project_id
+client = spanner.client instance_id, database_id
 config = Spanvalue.simple_format_config
 
-result = database.execute SQL
-fields = result.fields
+result = client.execute SQL
+fields = result.metadata.row_type.fields
 col_types = fields.map { |field| Spanvalue::ClientTypeAdapter.adapt(field.type) }
 
 result.rows.each do |row|
