@@ -1,1 +1,31 @@
 .refs/
+
+# Python
+python/.venv/
+python/**/__pycache__/
+python/.pytest_cache/
+
+# Java / Maven
+java/target/
+
+# Node
+nodejs/node_modules/
+
+# Rust
+rust/target/
+
+# C#
+csharp/**/bin/
+csharp/**/obj/
+# PHP
+php/vendor/
+php/.phpunit.cache/
+
+# Ruby
+ruby/Gemfile.lock
+
+# C++
+cpp/build/
+
+# OS
+.DS_Store

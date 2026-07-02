@@ -1,0 +1,17 @@
+{
+  "name": "@apstndb/spanvalue",
+  "version": "0.1.0-alpha.0",
+  "description": "Format Cloud Spanner types and column values (human-readable, SQL literals, spanner-cli)",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
