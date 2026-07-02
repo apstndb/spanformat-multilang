@@ -28,14 +28,19 @@ $database = $client->instance($instanceId)->database($databaseId);
 $config = simple_format_config();
 
 $result = $database->execute($sql);
-$fields = $result->info()['metadata']['rowType']['fields'] ?? [];
+
+// Metadata is populated after the result set is iterated (same timing as other clients).
+$rows = iterator_to_array($result->rows());
+if ($rows === []) {
+    fwrite(STDERR, "Query returned no rows.\n");
+    exit(1);
+}
+
+$fields = $result->metadata()['rowType']['fields'] ?? [];
 $colTypes = array_map(static fn (array $field): array => ClientTypeAdapter::adapt($field['type']), $fields);
 
-foreach ($result->rows() as $row) {
-    $nativeValues = [];
-    foreach (array_keys($colTypes) as $index) {
-        $nativeValues[] = $row[$index];
-    }
+foreach ($rows as $row) {
+    $nativeValues = array_map(static fn (array $field) => $row[$field['name']], $fields);
 
     $wireValue = encode_value($colTypes[0], $nativeValues[0]);
     echo 'encode_value (n): ' . json_encode($wireValue, JSON_THROW_ON_ERROR) . PHP_EOL;
@@ -44,6 +49,3 @@ foreach ($result->rows() as $row) {
     echo 'format_result_row: ' . json_encode($formatted, JSON_THROW_ON_ERROR) . PHP_EOL;
     exit(0);
 }
-
-fwrite(STDERR, "Query returned no rows.\n");
-exit(1);

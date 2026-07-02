@@ -62,7 +62,7 @@ No GCP credentials are required when `SPANNER_EMULATOR_HOST` is set.
 | Java | `cd java && mvn -q install -DskipTests && cd ../examples/java && SPANNER_EMULATOR_HOST=localhost:9010 mvn -q -DskipTests exec:java` |
 | Node.js | `cd examples/nodejs && npm ci && SPANNER_EMULATOR_HOST=localhost:9010 node query_format.mjs` |
 | Ruby | `cd examples/ruby && bundle install && SPANNER_EMULATOR_HOST=localhost:9010 bundle exec ruby query_format.rb` |
-| PHP | `cd examples/php && composer install && SPANNER_EMULATOR_HOST=localhost:9010 php query_format.php` |
+| PHP | See [`php/README.md`](php/README.md) — `ext-grpc`, then `cd examples/php && composer install && SPANNER_EMULATOR_HOST=localhost:9010 php query_format.php` |
 | C# | `cd examples/csharp && SPANNER_EMULATOR_HOST=localhost:9010 dotnet run` |
 | Rust | `cd examples/rust && SPANNER_EMULATOR_HOST=localhost:9010 cargo run` |
 | C++ | See [`cpp/README.md`](cpp/README.md) — vcpkg + `google-cloud-cpp[spanner]`, then `SPANNER_EMULATOR_HOST=localhost:9010 ./build/query_format` |
@@ -82,7 +82,7 @@ format_result_row: ["1", "hello", "true"]
 - **Rust** — uses `google-cloud-spanner` with `NativeValue` wrappers for column values.
 - **C++** — the high-level `RowStream` does not expose `ResultSetMetadata`; the example documents wire types equivalent to metadata for this fixed `SELECT` and still runs the query through `google::cloud::spanner::Client`.
 - **C++** — install [google-cloud-cpp](https://github.com/googleapis/google-cloud-cpp) Spanner via [vcpkg](https://vcpkg.io/) (`vcpkg.json` in `examples/cpp/`). See [`cpp/README.md`](cpp/README.md).
-- **PHP** requires the `ext-grpc` and `ext-intl` extensions (`pecl install grpc` or your OS package).
+- **PHP** — requires `ext-grpc` and `ext-intl`; install steps for macOS in [`php/README.md`](php/README.md).
 - **Ruby** on 3.4+/4.0+ may need explicit `mutex_m` and `fiddle` gems (see `examples/ruby/Gemfile`).
 
 ## CI
