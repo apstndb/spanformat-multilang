@@ -1,4 +1,6 @@
-# spanvalue-multilang
+# spanformat-multilang
+
+Multi-language ports of Cloud Spanner **type** formatting ([spantype](https://github.com/apstndb/spantype)) and **value** formatting ([spanvalue](https://github.com/apstndb/spanvalue)); the repository name reflects both surfaces.
 
 Type and value formatting libraries for Cloud Spanner, ported to every
 language with an official Spanner client library.

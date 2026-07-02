@@ -1,4 +1,4 @@
-# spanvalue-multilang formatting specification
+# spanformat-multilang formatting specification
 
 This document is the normative specification for every language implementation
 in this repository. It is derived from the Go reference implementations

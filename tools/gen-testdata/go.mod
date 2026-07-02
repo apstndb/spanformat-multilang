@@ -1,4 +1,4 @@
-module github.com/apstndb/spanvalue-multilang/tools/gen-testdata
+module github.com/apstndb/spanformat-multilang/tools/gen-testdata
 
 go 1.26.4
 

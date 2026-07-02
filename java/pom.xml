@@ -11,7 +11,7 @@
 
   <name>spanvalue</name>
   <description>Cloud Spanner type and value formatting (Java port of apstndb/spantype and apstndb/spanvalue)</description>
-  <url>https://github.com/apstndb/spanvalue-multilang</url>
+  <url>https://github.com/apstndb/spanformat-multilang</url>
 
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
