@@ -2,14 +2,16 @@
 
 pub mod bytes_fmt;
 pub mod codes;
+pub mod encoder;
 pub mod errors;
 pub mod float_fmt;
 pub mod format_config;
+pub mod proto_adapt;
 pub mod quote;
 pub mod type_format;
 pub mod types;
 
-pub use bytes_fmt::{decode_base64_wire, readable_bytes_string, readable_string_from_base64_wire};
+pub use bytes_fmt::{decode_base64_wire, encode_base64_wire, readable_bytes_string, readable_string_from_base64_wire};
 pub use codes::{
     parse_type_annotation, parse_type_code, type_annotation_name, type_code_name, TypeAnnotationCode,
     TypeCode, TYPE_ANNOTATION_NAMES, TYPE_CODE_NAMES,
@@ -25,6 +27,12 @@ pub use float_fmt::{
 pub use format_config::{
     format_row, format_value, literal_format_config, simple_format_config,
     spanner_cli_format_config, FormatConfig, Preset,
+};
+pub use encoder::{
+    encode_value, format_result_row, wire_to_native, NativeValue,
+};
+pub use proto_adapt::{
+    adapt_type, format_value_like, TypeLike, ValueLike,
 };
 pub use quote::{
     escape_rune, normalize_literal_quote, sql_cast_quoted, to_bytes_literal, to_string_literal,

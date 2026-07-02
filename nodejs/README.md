@@ -17,8 +17,12 @@ Zero npm dependencies. Node.js 18+. ESM.
 Values accept plain JS scalars, arrays for ARRAY/STRUCT wire shorthand, and
 wrapped wire objects (`stringValue`, `listValue`, ...).
 
-High-level client row types are not accepted — convert to wire
-`(Type, Value)` first.
+Use `encodeValue(type, nativeValue)` to build wire values from native JS
+types (`boolean`, `number`, `string`, `Buffer`, `null`, `Array`, plain
+objects for STRUCT). `formatResultRow(types, values, config)` encodes each
+column then formats the row. `adaptClientType(clientType)` converts
+`@google-cloud/spanner` structural types via duck-typing (no client
+dependency).
 
 ## Quick start
 
@@ -41,13 +45,26 @@ console.log(formatValue(typ, value, config));
 // STRUCT<n INT64, s STRING>(1, "hello")
 ```
 
+```javascript
+import { encodeValue, formatResultRow, simpleFormatConfig } from '@apstndb/spanvalue';
+
+const wire = encodeValue({ code: 'INT64' }, 42);
+const row = formatResultRow(
+  [{ code: 'INT64' }, { code: 'STRING' }],
+  [42, 'hello'],
+  simpleFormatConfig(),
+);
+// ['42', 'hello']
+```
+
 ## Tests
 
 ```bash
 cd nodejs && npm test
 ```
 
-Conformance cases load `../testdata/conformance.json`.
+Conformance cases load `../testdata/conformance.json`. Encoder unit tests are
+in `test/test_encoder.js`.
 
 ## License
 

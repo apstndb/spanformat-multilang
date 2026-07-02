@@ -77,3 +77,36 @@ pub fn readable_bytes_string(data: &[u8]) -> String {
 pub fn readable_string_from_base64_wire(wire: &str) -> Result<String> {
     Ok(readable_bytes_string(&decode_base64_wire(wire)?))
 }
+
+/// RFC 4648 standard base64 with padding (Spanner BYTES/PROTO wire form).
+pub fn encode_base64_wire(data: &[u8]) -> String {
+    const ENCODE: &[u8; 64] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    if data.is_empty() {
+        return String::new();
+    }
+    let mut out = String::with_capacity((data.len() + 2) / 3 * 4);
+    let mut i = 0usize;
+    while i + 3 <= data.len() {
+        let n = u32::from(data[i]) << 16 | u32::from(data[i + 1]) << 8 | u32::from(data[i + 2]);
+        out.push(ENCODE[((n >> 18) & 63) as usize] as char);
+        out.push(ENCODE[((n >> 12) & 63) as usize] as char);
+        out.push(ENCODE[((n >> 6) & 63) as usize] as char);
+        out.push(ENCODE[(n & 63) as usize] as char);
+        i += 3;
+    }
+    let rem = data.len() - i;
+    if rem == 1 {
+        let n = u32::from(data[i]) << 16;
+        out.push(ENCODE[((n >> 18) & 63) as usize] as char);
+        out.push(ENCODE[((n >> 12) & 63) as usize] as char);
+        out.push('=');
+        out.push('=');
+    } else if rem == 2 {
+        let n = u32::from(data[i]) << 16 | u32::from(data[i + 1]) << 8;
+        out.push(ENCODE[((n >> 18) & 63) as usize] as char);
+        out.push(ENCODE[((n >> 12) & 63) as usize] as char);
+        out.push(ENCODE[((n >> 6) & 63) as usize] as char);
+        out.push('=');
+    }
+    out
+}

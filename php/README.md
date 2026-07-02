@@ -11,10 +11,10 @@ PHP 8.1+ with `ext-intl`. No hard dependency on `google/cloud-spanner`.
 
 **Protojson arrays** are the primary, conformance-tested input path.
 
-The library also duck-types objects with public properties or a `get($name)`
-method, including `Google\Cloud\Spanner\V1` protobuf messages when available.
-Protobuf support is thinner than the Java port — prefer protojson arrays for
-portable integration.
+The library also duck-types objects with public properties, protobuf getters
+(`getCode()`, `getListValue()`, …), or a `get($name)` method, including
+`Google\Cloud\Spanner\V1` and `Google\Protobuf\Value` messages when available.
+Protobuf support is best-effort; prefer protojson arrays for portable integration.
 
 High-level Spanner client row types are not accepted; convert to wire
 `(Type, Value)` first.
@@ -23,6 +23,8 @@ High-level Spanner client row types are not accepted; convert to wire
 
 ```php
 <?php
+use function Apstndb\SpanValue\encode_value;
+use function Apstndb\SpanValue\format_result_row;
 use function Apstndb\SpanValue\format_value;
 use function Apstndb\SpanValue\literal_format_config;
 
@@ -40,7 +42,30 @@ $value = ['1', 'hello'];
 $config = literal_format_config();
 echo format_value($typ, $value, $config);
 // STRUCT<n INT64, s STRING>(1, "hello")
+
+// Build wire values from native PHP data, then format a result row:
+$wire = encode_value(['code' => 'INT64'], 42);
+$cells = format_result_row(
+    [['code' => 'INT64'], $typ],
+    [42, ['n' => 1, 's' => 'hello']],
+    $config,
+);
 ```
+
+## Encoder API
+
+- `encode_value($type, $nativeValue)` — build a wire `google.protobuf.Value`
+  (protojson-compatible array/scalar) from native PHP data.
+- `format_result_row($types, $nativeValues, $config)` — `encode_value` per column,
+  then `format_row`.
+
+Native inputs: scalars, `null`, ordered lists for `ARRAY`/`STRUCT`, or associative
+arrays for `STRUCT` keyed by field name. `BYTES`/`PROTO` accept raw binary strings
+(base64-encoded on the wire) or existing base64 wire text.
+
+Protobuf duck-typing: `Google\Cloud\Spanner\V1\Type` and `Google\Protobuf\Value`
+objects are supported for formatting via getter reflection (`getCode()`,
+`getListValue()`, etc.) in addition to protojson arrays.
 
 ## Tests
 

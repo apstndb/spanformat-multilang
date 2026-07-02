@@ -9,6 +9,8 @@ require_relative 'spanvalue/bytes_fmt'
 require_relative 'spanvalue/float_fmt'
 require_relative 'spanvalue/type_format'
 require_relative 'spanvalue/format_config'
+require_relative 'spanvalue/encoder'
+require_relative 'spanvalue/client_type_adapter'
 
 module Spanvalue
   class << self
@@ -74,6 +76,14 @@ module Spanvalue
 
     def format_row(types, values, config)
       ValueFormat.format_row(types, values, config)
+    end
+
+    def encode_value(typ, native_value)
+      Encoder.encode_value(typ, native_value)
+    end
+
+    def format_result_row(types, values, config)
+      Encoder.format_result_row(types, values, config)
     end
   end
 end

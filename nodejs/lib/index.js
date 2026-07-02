@@ -8,6 +8,7 @@ export {
   EmptyTypeFQNError,
   UnexpectedComplexValueKindError,
   EmptyNullStringError,
+  TypeMismatchError,
 } from './errors.js';
 
 export {
@@ -95,5 +96,9 @@ export {
   readableBytesString,
   readableStringFromBase64Wire,
 } from './bytes-fmt.js';
+
+export { encodeValue, formatResultRow } from './encoder.js';
+
+export { adaptClientType } from './client-type-adapter.js';
 
 export const version = '0.1.0-alpha.0';

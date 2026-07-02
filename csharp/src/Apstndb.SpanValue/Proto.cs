@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Reflection;
 using System.Text.Json;
 
 namespace Apstndb.SpanValue;
@@ -22,6 +24,10 @@ internal static class Proto
             return null;
         }
 
+        var fromProto = GetFromProtobuf(obj, names);
+        if (fromProto is not null)
+            return fromProto;
+
         var type = obj.GetType();
         foreach (var name in names)
         {
@@ -31,6 +37,78 @@ internal static class Proto
         }
 
         return null;
+    }
+
+    private static object? GetFromProtobuf(object obj, string[] names)
+    {
+        var type = obj.GetType();
+        if (!IsProtobufMessage(type))
+            return null;
+
+        foreach (var name in names)
+        {
+            var val = InvokeProtobufGetter(type, obj, name);
+            if (val is not null)
+                return val;
+        }
+
+        return null;
+    }
+
+    private static bool IsProtobufMessage(Type type)
+    {
+        foreach (var iface in type.GetInterfaces())
+        {
+            if (iface.FullName == "Google.Protobuf.IMessage")
+                return true;
+        }
+        return type.GetProperty("Descriptor") is not null;
+    }
+
+    private static object? InvokeProtobufGetter(Type type, object obj, string name)
+    {
+        foreach (var candidate in PropertyNameCandidates(name))
+        {
+            var hasMethod = type.GetMethod("Has" + candidate);
+            if (hasMethod is not null)
+            {
+                if (hasMethod.Invoke(obj, null) is not true)
+                    continue;
+            }
+
+            var getMethod = type.GetMethod("Get" + candidate) ?? type.GetMethod(candidate);
+            if (getMethod is null)
+                continue;
+
+            var val = getMethod.Invoke(obj, null);
+            if (val is not null)
+                return val;
+        }
+
+        return null;
+    }
+
+    private static IEnumerable<string> PropertyNameCandidates(string name)
+    {
+        yield return Capitalize(ToCamelCase(name));
+        yield return Capitalize(name);
+        yield return name;
+        yield return ToCamelCase(name);
+    }
+
+    private static string Capitalize(string s) =>
+        string.IsNullOrEmpty(s) ? s : char.ToUpperInvariant(s[0]) + s[1..];
+
+    private static string ToCamelCase(string snake)
+    {
+        if (!snake.Contains('_'))
+            return snake;
+
+        var parts = snake.Split('_', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length == 0)
+            return snake;
+
+        return parts[0] + string.Concat(parts.Skip(1).Select(Capitalize));
     }
 
     private static object? GetFromJson(JsonElement je, string[] names)
@@ -98,6 +176,15 @@ internal static class Proto
         if (value is IReadOnlyList<object?>)
             return "list";
 
+        if (value is IEnumerable enumerable and not string)
+        {
+            if (enumerable is not IDictionary)
+                return "list";
+        }
+
+        if (IsProtobufValue(value))
+            return ValueKindFromProtobufValue(value);
+
         if (value is IReadOnlyDictionary<string, object?> dict)
         {
             if (dict.ContainsKey("null_value") || dict.ContainsKey("nullValue"))
@@ -114,6 +201,29 @@ internal static class Proto
         }
 
         return "missing";
+    }
+
+    private static bool IsProtobufValue(object value)
+    {
+        var type = value.GetType();
+        if (type.FullName == "Google.Protobuf.WellKnownTypes.Value")
+            return true;
+        return type.GetProperty("KindCase") is not null;
+    }
+
+    private static string ValueKindFromProtobufValue(object value)
+    {
+        var kindCase = value.GetType().GetProperty("KindCase")?.GetValue(value);
+        var kindName = kindCase?.ToString() ?? "";
+        return kindName switch
+        {
+            "NullValue" => "null",
+            "BoolValue" => "bool",
+            "NumberValue" => "number",
+            "StringValue" => "string",
+            "ListValue" => "list",
+            _ => "missing",
+        };
     }
 
     private static string ValueKindFromJson(JsonElement je)
@@ -215,14 +325,32 @@ internal static class Proto
         if (value is IReadOnlyList<object?> list)
             return list;
 
+        if (value is IEnumerable enumerable and not string)
+        {
+            if (enumerable is not IDictionary)
+            {
+                var items = new List<object?>();
+                foreach (var item in enumerable)
+                    items.Add(item);
+                return items;
+            }
+        }
+
         if (value is JsonElement je)
             return ListValuesFromJson(je);
 
-        var lv = Get(value, "list_value", "listValue");
-        if (lv is null)
+        if (IsProtobufValue(value!))
+        {
+            var lv = Get(value, "list_value", "listValue", "ListValue");
+            if (lv is not null)
+                return ListValues(lv);
+        }
+
+        var lv2 = Get(value, "list_value", "listValue");
+        if (lv2 is null)
             return Array.Empty<object?>();
 
-        var vals = Get(lv, "values", "Values");
+        var vals = Get(lv2, "values", "Values");
         return AsList(vals);
     }
 

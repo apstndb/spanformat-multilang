@@ -59,6 +59,29 @@ public final class SpanValue {
     return ValueFormat.formatRow(types, values, config);
   }
 
+  public static com.google.protobuf.Value encodeValue(Object typ, Object nativeValue) {
+    return Gcvctor.encodeValue(typ, nativeValue);
+  }
+
+  public static com.google.spanner.v1.Type adaptClientType(Object clientType) {
+    return ClientTypeAdapter.adapt(clientType);
+  }
+
+  public static java.util.List<String> formatResultRow(
+      java.util.List<Object> types,
+      java.util.List<Object> nativeValues,
+      ValueFormat.FormatConfig config) {
+    if (types.size() != nativeValues.size()) {
+      throw new IllegalArgumentException(
+          "len(types)=" + types.size() + " != len(values)=" + nativeValues.size());
+    }
+    java.util.List<Object> encoded = new java.util.ArrayList<>(nativeValues.size());
+    for (int i = 0; i < types.size(); i++) {
+      encoded.add(Gcvctor.encodeValue(types.get(i), nativeValues.get(i)));
+    }
+    return ValueFormat.formatRow(types, encoded, config);
+  }
+
   public static ValueFormat.FormatConfig simpleFormatConfig() {
     return ValueFormat.simpleFormatConfig();
   }

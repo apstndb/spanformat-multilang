@@ -9,6 +9,7 @@ from .errors import (
     UnexpectedComplexValueKindError,
     UnknownTypeError,
 )
+from .encoder import adapt_client_type, encode_value, format_result_row
 from .format_config import (
     FormatConfig,
     Preset,
@@ -45,6 +46,7 @@ from .type_format import (
 )
 
 __all__ = [
+    "adapt_client_type",
     "ArrayMode",
     "EmptyNullStringError",
     "EmptyTypeFQNError",
@@ -68,7 +70,9 @@ __all__ = [
     "UnexpectedComplexValueKindError",
     "UnknownMode",
     "UnknownTypeError",
+    "encode_value",
     "format_proto_enum",
+    "format_result_row",
     "format_row",
     "format_struct_fields",
     "format_type",

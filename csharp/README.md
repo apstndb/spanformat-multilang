@@ -9,19 +9,37 @@ Zero NuGet dependencies. .NET 8+.
 
 ## Input model
 
-The public API accepts **protojson-shaped data** today:
+The public API accepts:
 
 - `System.Text.Json.JsonElement` (conformance test path)
 - `IReadOnlyDictionary<string, object?>`
-- Duck-typed C# objects via property reflection (`code`/`Code`,
-  `structType`/`StructType`, etc.)
-
-**Not supported yet:** direct adapters for `Google.Cloud.Spanner.V1.Type` or
-`Google.Protobuf.WellKnownTypes.Value`. You can serialize protobuf messages to
-JSON and pass the resulting `JsonElement`, or build dictionaries manually.
+- Duck-typed C# objects via property reflection (`code`/`Code`, etc.)
+- **Protobuf messages** via reflection when `Google.Protobuf` /
+  `Google.Cloud.Spanner.V1` types are present at runtime (`IMessage`,
+  `WellKnownTypes.Value`, `GetCode()` / `KindCase` accessors). No package
+  reference is required in this library.
 
 High-level `Google.Cloud.Spanner` row types (`Struct`, typed column values) are
-not accepted — convert to wire `(Type, Value)` first.
+not accepted directly — use [`ValueEncoder.EncodeValue`](#wire-encoders) or
+convert to wire `(Type, Value)` first.
+
+## Wire encoders
+
+[`ValueEncoder`](src/Apstndb.SpanValue/Encoder.cs) builds wire
+`google.protobuf.Value` payloads from native column values, then formats rows:
+
+```csharp
+using Apstndb.SpanValue;
+
+var types = new object?[] { /* wire Type per column */ };
+var natives = new object?[] { 1L, null, "hello" };
+var cells = ValueEncoder.FormatResultRow(types, natives, FormatConfigFactory.SimpleFormatConfig());
+```
+
+- `EncodeValue(type, native)` → wire `Value` (protojson-shaped `object?`)
+- `FormatResultRow(types, nativeValues, config)` → `encode` + `FormatRow`
+- `AdaptClientType(clientType)` → wire `Type` dict (best-effort for
+  `Google.Cloud.Spanner.V1.Type` / `SpannerDbType` via reflection)
 
 ## Quick start
 

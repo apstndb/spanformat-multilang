@@ -114,7 +114,7 @@ jobs:
         working-directory: ruby
         run: |
           gem install minitest
-          ruby -Itest test/test_conformance.rb
+          ruby -Itest test/test_conformance.rb test/test_encoder.rb
 
   nodejs:
     name: nodejs

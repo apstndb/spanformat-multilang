@@ -16,8 +16,12 @@ Zero gem dependencies. Ruby 3.2+.
 Values accept plain Ruby scalars, arrays for ARRAY/STRUCT wire shorthand, and
 wire wrapper hashes (string keys for `string_value`, `list_value`, etc.).
 
-High-level client row types are not accepted — convert to wire
-`(Type, Value)` first.
+Use `Spanvalue.encode_value(type, native_value)` to build wire values from
+native Ruby types (`true`/`false`, `Integer`, `String`, binary `String`,
+`nil`, `Array`, `Hash` for STRUCT). `Spanvalue.format_result_row` encodes
+each column then formats the row. `Spanvalue::ClientTypeAdapter.adapt` converts
+`Google::Cloud::Spanner` structural types via duck-typing (no client
+dependency).
 
 ## Quick start
 
@@ -40,13 +44,24 @@ puts Spanvalue.format_value(typ, value, config)
 # STRUCT<n INT64, s STRING>(1, "hello")
 ```
 
+```ruby
+wire = Spanvalue.encode_value({ code: 'INT64' }, 42)
+row = Spanvalue.format_result_row(
+  [{ code: 'INT64' }, { code: 'STRING' }],
+  [42, 'hello'],
+  Spanvalue.simple_format_config
+)
+# => ["42", "hello"]
+```
+
 ## Tests
 
 ```bash
-cd ruby && gem install minitest && ruby -Itest test/test_conformance.rb
+cd ruby && gem install minitest && ruby -Itest test/test_conformance.rb test/test_encoder.rb
 ```
 
-Conformance cases load `../testdata/conformance.json`.
+Conformance cases load `../testdata/conformance.json`. Encoder unit tests are
+in `test/test_encoder.rb`.
 
 ## License
 

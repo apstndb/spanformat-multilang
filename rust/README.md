@@ -9,18 +9,33 @@ Zero runtime dependencies. Rust stable.
 
 ## Input model
 
-The public API accepts **native Rust types only**:
+The public API accepts **native Rust types**:
 
 - `spanvalue::Type` for type formatting
 - `spanvalue::Value` for value formatting
 
-There are no built-in adapters for prost/protobuf messages or
-`google-cloud-spanner` types. Conformance tests use `serde_json` internally to
-parse protojson into `Type`/`Value`; callers must perform that conversion
-themselves (or build `Type`/`Value` directly via `type_from_parts` and the
-`Value` enum variants).
+Protobuf-shaped types can implement [`TypeLike`](src/proto_adapt.rs) /
+[`ValueLike`](src/proto_adapt.rs) (no `prost` dependency) and use
+`format_value_like`. Conformance tests use `serde_json` internally to parse
+protojson into `Type`/`Value`.
 
-High-level client row values are not supported — convert to wire form first.
+High-level client row values are not supported — use the encoder below or
+convert to wire form first.
+
+## Wire encoders
+
+[`encode_value`](src/encoder.rs) maps `NativeValue` + wire `Type` → `Value`.
+[`format_result_row`](src/encoder.rs) encodes each column then calls
+[`format_row`](src/format_config.rs).
+
+```rust
+use spanvalue::{
+    encode_value, format_result_row, simple_format_config, type_from_parts, NativeValue,
+};
+
+let typ = type_from_parts(Some("INT64"), None, None, None, None);
+let wire = encode_value(&typ, &NativeValue::I64(42)).unwrap();
+```
 
 ## Quick start
 

@@ -70,4 +70,41 @@ inline std::string readable_string_from_base64_wire(const std::string& wire) {
   return readable_bytes_string(decode_base64_wire(wire));
 }
 
+inline std::string encode_base64_wire(const std::vector<uint8_t>& data) {
+  static const char kEncode[] =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  if (data.empty()) {
+    return "";
+  }
+  std::string out;
+  out.reserve((data.size() + 2) / 3 * 4);
+  std::size_t i = 0;
+  while (i + 3 <= data.size()) {
+    const uint32_t n = (static_cast<uint32_t>(data[i]) << 16) |
+                       (static_cast<uint32_t>(data[i + 1]) << 8) |
+                       static_cast<uint32_t>(data[i + 2]);
+    out.push_back(kEncode[(n >> 18) & 63]);
+    out.push_back(kEncode[(n >> 12) & 63]);
+    out.push_back(kEncode[(n >> 6) & 63]);
+    out.push_back(kEncode[n & 63]);
+    i += 3;
+  }
+  const std::size_t rem = data.size() - i;
+  if (rem == 1) {
+    const uint32_t n = static_cast<uint32_t>(data[i]) << 16;
+    out.push_back(kEncode[(n >> 18) & 63]);
+    out.push_back(kEncode[(n >> 12) & 63]);
+    out.push_back('=');
+    out.push_back('=');
+  } else if (rem == 2) {
+    const uint32_t n = (static_cast<uint32_t>(data[i]) << 16) |
+                       (static_cast<uint32_t>(data[i + 1]) << 8);
+    out.push_back(kEncode[(n >> 18) & 63]);
+    out.push_back(kEncode[(n >> 12) & 63]);
+    out.push_back(kEncode[(n >> 6) & 63]);
+    out.push_back('=');
+  }
+  return out;
+}
+
 }  // namespace spanvalue

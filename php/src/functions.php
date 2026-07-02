@@ -78,4 +78,15 @@ function format_row(array $types, array $values, FormatConfig $config): array
     return ValueFormat::formatRow($types, $values, $config);
 }
 
+function encode_value(mixed $type, mixed $nativeValue): mixed
+{
+    return Encoder::encodeValue($type, $nativeValue);
+}
+
+/** @param list<mixed> $types @param list<mixed> $nativeValues @return list<string> */
+function format_result_row(array $types, array $nativeValues, FormatConfig $config): array
+{
+    return Encoder::formatResultRow($types, $nativeValues, $config);
+}
+
 const VERSION = '0.1.0-alpha.0';

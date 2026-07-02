@@ -40,25 +40,32 @@ This pair is the core API every port targets. In practice, callers pass either:
 ### High-level client row values
 
 Official Spanner client libraries expose ergonomic row types (`Struct`,
-`GenericColumnValue`, typed getters, etc.) that are **not** wire-shaped. None of
-the ports accept those directly today — you must convert to wire
-`(google.spanner.v1.Type, google.protobuf.Value)` first (a gcvctor-style encoder
-is planned future work; Go upstream handles this via
-`spanvalue.GenericColumnValue`).
+typed getters, native scalars, etc.) that are **not** wire-shaped. Every port
+now ships a **gcvctor-style encoder** (see [`spec/ENCODER.md`](spec/ENCODER.md))
+to build wire `google.protobuf.Value` from native values, plus
+`format_result_row` to format query-result columns in one call:
+
+```
+wire_value = encode_value(wire_type, native_value)
+formatted  = format_result_row(types, native_values, config)
+```
+
+Go upstream handles the same path via `spanvalue/gcvctor` and
+`FormatRowColumns`.
 
 ### Per-language input support
 
-| Language | Type inputs | Value inputs | Notes |
-|---|---|---|---|
-| Go | (upstream) | (upstream) | Reference implementation; full client integration |
-| Python | protojson dict, duck-typed protos | protojson, duck-typed protos | Optional `google-cloud-spanner` protos; see [`python/README.md`](python/README.md) |
-| Java | protojson `Map`, `com.google.spanner.v1.Type` | protojson, `com.google.protobuf.Value` | **No** `com.google.cloud.spanner.Type` STRUCT support — wire proto only; see [`java/README.md`](java/README.md) |
-| Node.js | plain objects, duck-typed protos | plain JS + arrays, duck-typed protos | Structural compatibility with `@google-cloud/spanner` protos; see [`nodejs/README.md`](nodejs/README.md) |
-| Ruby | `Hash`, duck-typed protos | arrays, `Hash`, duck-typed protos | See [`ruby/README.md`](ruby/README.md) |
-| PHP | arrays, duck-typed protos | arrays, duck-typed protos | Protojson primary; protobuf duck-typing thinner than Java; see [`php/README.md`](php/README.md) |
-| C# | protojson (`JsonElement`, dict) | protojson (`JsonElement`, dict) | No direct `Google.Protobuf` message adapters yet; see [`csharp/README.md`](csharp/README.md) |
-| Rust | native `spanvalue::Type` | native `spanvalue::Value` | serde_json in tests only; no prost/google-cloud-spanner adapters; see [`rust/README.md`](rust/README.md) |
-| C++ | `nlohmann::json` | `nlohmann::json` | JSON/protojson only; no protobuf C++ types yet; see [`cpp/README.md`](cpp/README.md) |
+| Language | Type inputs | Value inputs | Encoder / adapter | Notes |
+|---|---|---|---|---|
+| Go | (upstream) | (upstream) | `gcvctor`, `FormatRowColumns` | Reference implementation |
+| Python | protojson dict, duck-typed protos | protojson, duck-typed protos | `encode_value`, `adapt_client_type`, `format_result_row` | Optional `google-cloud-spanner`; see [`python/README.md`](python/README.md) |
+| Java | protojson `Map`, `com.google.spanner.v1.Type`, `com.google.cloud.spanner.Type` (via adapter) | protojson, `com.google.protobuf.Value`, native via `Gcvctor` | `Gcvctor.encodeValue`, `ClientTypeAdapter`, `formatResultRow` | STRUCT adapter maps `getStructFields()` → `struct_type.fields`; see [`java/README.md`](java/README.md) |
+| Node.js | plain objects, duck-typed protos, client types (adapter) | plain JS + arrays, duck-typed protos, native via encoder | `encodeValue`, `adaptClientType`, `formatResultRow` | See [`nodejs/README.md`](nodejs/README.md) |
+| Ruby | `Hash`, duck-typed protos, client types (adapter) | arrays, `Hash`, duck-typed protos, native via encoder | `encode_value`, `ClientTypeAdapter.adapt`, `format_result_row` | See [`ruby/README.md`](ruby/README.md) |
+| PHP | arrays, duck-typed protos, `Google\Cloud\Spanner\V1\Type` | arrays, duck-typed protos, `Google\Protobuf\Value`, native via encoder | `encode_value`, `format_result_row` | Protobuf getter reflection; see [`php/README.md`](php/README.md) |
+| C# | protojson, `Google.Protobuf.IMessage`, `SpannerDbType` (adapter) | protojson, protobuf `Value`, native via encoder | `ValueEncoder.EncodeValue`, `AdaptClientType`, `FormatResultRow` | See [`csharp/README.md`](csharp/README.md) |
+| Rust | native `spanvalue::Type`, `TypeLike` trait | native `spanvalue::Value`, `ValueLike` trait | `encode_value`, `format_result_row` | Trait-based duck-typing; see [`rust/README.md`](rust/README.md) |
+| C++ | `nlohmann::json`, optional protobuf template | `nlohmann::json`, native via encoder | `encode_value`, `format_result_row` | No protobuf dep by default; see [`cpp/README.md`](cpp/README.md) |
 
 ## Languages
 
@@ -96,7 +103,7 @@ root:
 | C# | .NET 8 SDK | `cd csharp && dotnet test` |
 | Rust | Rust stable | `cd rust && cargo test` |
 | PHP | PHP 8.1+ with `intl` | `cd php && composer install && vendor/bin/phpunit` |
-| Ruby | Ruby 3.2+ | `cd ruby && gem install minitest && ruby -Itest test/test_conformance.rb` |
+| Ruby | Ruby 3.2+ | `cd ruby && gem install minitest && ruby -Itest test/test_conformance.rb test/test_encoder.rb` |
 | Node.js | Node.js 18+ | `cd nodejs && npm test` |
 | C++ | CMake 3.16+, C++17 | `cd cpp && cmake -B build && cmake --build build && ctest --test-dir build` |
 
@@ -151,6 +158,7 @@ minimal-escape; double- or single-quote preferred) matching upstream
 
 ```
 spec/FORMAT.md            normative formatting specification
+spec/ENCODER.md           wire encoder (gcvctor) specification
 testdata/conformance.json shared conformance cases (generated)
 tools/gen-testdata/       Go generator (reference implementation)
 <language>/               one library per language, self-contained

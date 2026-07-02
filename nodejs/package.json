@@ -8,7 +8,7 @@
     ".": "./lib/index.js"
   },
   "scripts": {
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js test/test_encoder.js"
   },
   "license": "MIT",
   "repository": {

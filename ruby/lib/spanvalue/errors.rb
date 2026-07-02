@@ -14,4 +14,6 @@ module Spanvalue
   class UnexpectedComplexValueKindError < SpanValueError; end
 
   class EmptyNullStringError < SpanValueError; end
+
+  class TypeMismatchError < SpanValueError; end
 end

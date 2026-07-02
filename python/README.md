@@ -57,32 +57,34 @@ print(format_value(row_type, row_value, spanner_cli_format_config()))
 The library accepts protojson dicts **and** duck-typed protobuf objects from the
 official client. No hard dependency on `google-cloud-spanner` is required.
 
-**Note:** high-level client row types (`Struct`, typed column getters) are not
-wire-shaped. Convert to `(google.spanner.v1.Type, google.protobuf.Value)` before
-formatting — a convenience encoder is planned future work.
+**Note:** high-level client row types (`Struct`, typed column getters) can be
+encoded with `encode_value` / `format_result_row` when you have the column
+`Type` metadata and native Python values (scalars, lists, dicts for STRUCT).
 
 ```python
-from google.cloud.spanner_v1.types import Type, TypeCode, StructType
-from google.protobuf.struct_pb2 import Value, ListValue
+from spanvalue import encode_value, format_result_row, simple_format_config
 
-from spanvalue import format_row, literal_format_config
-
-# Build types/values from the official client library protos
 col_types = [
-    Type(code=TypeCode.INT64),
-    Type(code=TypeCode.STRING),
+    {"code": "INT64"},
+    {"code": "STRING"},
 ]
-col_values = [
-    Value(string_value="42"),
-    Value(string_value="east"),
-]
-
-config = literal_format_config()
-formatted = format_row(col_types, col_values, config)
-print(formatted)  # ['42', '"east"']
+native_values = [42, "east"]
+cells = format_result_row(col_types, native_values, simple_format_config())
+print(cells)  # ['42', 'east']
 ```
 
-When formatting query results, pair each column's `Type` from result metadata
+Optional: adapt `google.cloud.spanner` client types to wire `Type` dicts:
+
+```python
+from google.cloud.spanner import Type
+from spanvalue import adapt_client_type
+
+wire_type = adapt_client_type(Type.struct([
+    Type.StructField.of("n", Type.int64()),
+]))
+```
+
+When formatting pre-encoded wire values, pair each column's `Type` from result metadata
 with the corresponding `Value` from the row:
 
 ```python
@@ -101,6 +103,8 @@ for row in snapshot.execute_sql("SELECT id, name FROM Users"):
 - **Value formatting**: `FormatConfig` via `simple_format_config`,
   `literal_format_config` (with `LiteralQuoteConfig`), `spanner_cli_format_config`;
   `format_value`, `format_row`.
+- **Wire encoding**: `encode_value`, `format_result_row`, optional
+  `adapt_client_type` (requires `google-cloud-spanner` when adapting client types).
 - **Errors**: `MalformedWireError`, `UnknownTypeError`, `MismatchedFieldsError`,
   `EmptyTypeFQNError`, `EmptyNullStringError`.
 

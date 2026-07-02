@@ -18,16 +18,17 @@ Depends on `proto-google-cloud-spanner-v1` and `protobuf-java` only — no
 Protojson `Map` objects (e.g. from Gson) also work and are used in conformance
 tests.
 
-### `com.google.cloud.spanner.Type` limitation
+### `com.google.cloud.spanner.Type` adapter
 
-This library expects the **wire** `google.spanner.v1.Type` shape with
-`struct_type.fields[]`. The high-level client type
-`com.google.cloud.spanner.Type` uses a different STRUCT representation (field
-name map API) and is **not supported**. Convert to wire proto or protojson
-before formatting.
+Use `ClientTypeAdapter.adapt` (or `SpanValue.adaptClientType`) to convert the
+high-level client `Type` to wire `google.spanner.v1.Type`. STRUCT fields are
+mapped from `getStructFields()` to `struct_type.fields` (ordered list). The
+main library uses reflection and does not require `google-cloud-spanner` at
+runtime; adapter tests use it in test scope only.
 
-High-level row values (`com.google.cloud.spanner.Struct`, typed getters) are
-also not accepted — use `com.google.protobuf.Value` from result metadata.
+High-level row values (`com.google.cloud.spanner.Struct`, typed getters) can
+be formatted via `Gcvctor.encodeValue` / `SpanValue.formatResultRow` when you
+have column `Type` metadata and native Java values.
 
 ## Quick start
 
@@ -50,6 +51,16 @@ Value val = Value.newBuilder()
 
 var config = SpanValue.literalFormatConfig();
 System.out.println(SpanValue.formatValue(typ, val, config));
+
+// Encode native values, then format a result row
+List<Object> types = List.of(
+    Map.of("code", "INT64"),
+    Map.of("code", "STRING"));
+List<Object> nativeValues = List.of(42L, "east");
+List<String> cells = SpanValue.formatResultRow(types, nativeValues, SpanValue.simpleFormatConfig());
+
+// Adapt high-level client Type to wire proto
+com.google.spanner.v1.Type wireType = ClientTypeAdapter.adapt(com.google.cloud.spanner.Type.int64());
 ```
 
 Conformance tests also accept plain `List` values for STRUCT wire shorthand.

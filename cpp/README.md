@@ -10,12 +10,24 @@ Header-first library (CMake). C++17. Uses vendored [nlohmann/json](https://githu
 ## Input model
 
 The public API accepts **`nlohmann::json` only** — protojson-shaped JSON objects
-and arrays. There is no protobuf C++ dependency and no duck-typed template
-adapters over `google::spanner::v1` protos.
+and arrays. There is no protobuf C++ dependency in the default build.
 
-Integrate by serializing protobuf messages to JSON (protojson) or building
-`nlohmann::json` values manually. High-level Spanner client row types are not
-accepted.
+[`proto_adapt.hpp`](include/spanvalue/proto_adapt.hpp) provides an optional
+C++20 `adapt_client_type` template when your build already links protobuf
+message types with `code()` / `array_element_type()` accessors. Otherwise
+serialize protos to protojson JSON.
+
+High-level Spanner client row types are not accepted.
+
+## Wire encoders
+
+[`encoder.hpp`](include/spanvalue/encoder.hpp):
+
+- `encode_value(type_json, native_json)` → wire `Value` JSON
+- `format_result_row(types, native_values, config)` → encode + `format_row`
+
+Native JSON uses protojson shorthand (`true`, `"1"`, `3.14`, arrays for
+ARRAY/STRUCT).
 
 ## Quick start
 

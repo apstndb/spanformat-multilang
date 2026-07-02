@@ -2,6 +2,7 @@
 
 #include "spanvalue/bytes_fmt.hpp"
 #include "spanvalue/codes.hpp"
+#include "spanvalue/encoder.hpp"
 #include "spanvalue/errors.hpp"
 #include "spanvalue/float_fmt.hpp"
 #include "spanvalue/format_config.hpp"

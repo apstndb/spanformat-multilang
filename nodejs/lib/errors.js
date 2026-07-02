@@ -5,3 +5,4 @@ export class MismatchedFieldsError extends SpanValueError {}
 export class EmptyTypeFQNError extends SpanValueError {}
 export class UnexpectedComplexValueKindError extends SpanValueError {}
 export class EmptyNullStringError extends SpanValueError {}
+export class TypeMismatchError extends SpanValueError {}

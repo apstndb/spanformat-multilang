@@ -22,5 +22,12 @@ target_compile_definitions(spanvalue_conformance_test PRIVATE
   SPANVALUE_CONFORMANCE_PATH="${SPANVALUE_CONFORMANCE_JSON}"
 )
 
+add_executable(spanvalue_encoder_test test/encoder_test.cpp)
+target_link_libraries(spanvalue_encoder_test PRIVATE spanvalue)
+target_compile_definitions(spanvalue_encoder_test PRIVATE
+  SPANVALUE_CONFORMANCE_PATH="${SPANVALUE_CONFORMANCE_JSON}"
+)
+
 include(CTest)
 add_test(NAME conformance COMMAND spanvalue_conformance_test)
+add_test(NAME encoder COMMAND spanvalue_encoder_test)
