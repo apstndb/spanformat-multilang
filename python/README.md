@@ -119,6 +119,10 @@ uv run pytest -v
 
 Conformance cases load `../testdata/conformance.json`.
 
+## Integration example
+
+See [`../examples/python/`](../examples/python/) for a runnable Spanner emulator demo (`query_format.py`) that executes SQL and formats cells with `encode_value`, `adapt_client_type`, and `format_result_row`. Setup: [`../examples/README.md`](../examples/README.md).
+
 ## License
 
 MIT

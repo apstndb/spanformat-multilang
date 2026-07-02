@@ -75,6 +75,10 @@ cd php && composer install && vendor/bin/phpunit
 
 Conformance cases load `../testdata/conformance.json`.
 
+## Integration example
+
+See [`../examples/php/`](../examples/php/) for a runnable Spanner emulator demo (`query_format.php`) using `ClientTypeAdapter::adapt`, `encode_value`, and `format_result_row`. Setup: [`../examples/README.md`](../examples/README.md).
+
 ## License
 
 MIT

@@ -1,0 +1,2 @@
+-e ../../python
+google-cloud-spanner>=3.49.0

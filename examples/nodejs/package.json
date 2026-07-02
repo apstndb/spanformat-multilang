@@ -1,0 +1,9 @@
+{
+  "name": "spanvalue-spanner-example",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@apstndb/spanvalue": "file:../../nodejs",
+    "@google-cloud/spanner": "^7.16.0"
+  }
+}

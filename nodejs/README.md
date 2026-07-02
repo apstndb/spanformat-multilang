@@ -66,6 +66,10 @@ cd nodejs && npm test
 Conformance cases load `../testdata/conformance.json`. Encoder unit tests are
 in `test/test_encoder.js`.
 
+## Integration example
+
+See [`../examples/nodejs/`](../examples/nodejs/) for a runnable Spanner emulator demo (`query_format.mjs`) using `adaptClientType`, `encodeValue`, and `formatResultRow`. Setup: [`../examples/README.md`](../examples/README.md).
+
 ## License
 
 MIT

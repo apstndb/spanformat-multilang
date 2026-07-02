@@ -80,6 +80,10 @@ cd rust && cargo test
 
 Conformance cases load `../testdata/conformance.json`.
 
+## Integration example
+
+See [`../examples/rust/`](../examples/rust/) for a runnable Spanner emulator demo using `encode_value` and `format_result_row` with the preview `google-cloud-spanner` Rust client. Setup: [`../examples/README.md`](../examples/README.md).
+
 ## License
 
 MIT

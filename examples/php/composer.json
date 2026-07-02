@@ -1,0 +1,23 @@
+{
+    "name": "apstndb/spanvalue-spanner-example",
+    "description": "Spanner emulator integration example for apstndb/spanvalue",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-intl": "*",
+        "apstndb/spanvalue": "@dev",
+        "google/cloud-spanner": "^1.70"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../php"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Apstndb\\SpanValue\\Examples\\": "src/"
+        }
+    }
+}

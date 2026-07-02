@@ -115,6 +115,10 @@ $ cd tools/gen-testdata && go run .
 
 CI runs all of the above on every push and pull request to `main`.
 
+## Integration examples
+
+Runnable demos that query the [Spanner emulator](https://cloud.google.com/spanner/docs/emulator) with each official client library and format results via `encode_value` / `adapt_client_type` / `format_result_row` are in [`examples/`](examples/). See [`examples/README.md`](examples/README.md) for setup and one-liner run commands.
+
 ## How consistency is enforced
 
 - [`spec/FORMAT.md`](spec/FORMAT.md) is the normative specification for both

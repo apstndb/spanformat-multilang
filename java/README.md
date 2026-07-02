@@ -73,6 +73,10 @@ cd java && mvn test
 
 Conformance cases load `../testdata/conformance.json`.
 
+## Integration example
+
+See [`../examples/java/`](../examples/java/) for a runnable Spanner emulator demo (`QueryFormatExample`) using `SpanValue.adaptClientType`, `encodeValue`, and `formatResultRow`. Install the library first (`cd java && mvn install -DskipTests`). Setup: [`../examples/README.md`](../examples/README.md).
+
 ## License
 
 MIT

@@ -63,6 +63,10 @@ cd ruby && gem install minitest && ruby -Itest test/test_conformance.rb test/tes
 Conformance cases load `../testdata/conformance.json`. Encoder unit tests are
 in `test/test_encoder.rb`.
 
+## Integration example
+
+See [`../examples/ruby/`](../examples/ruby/) for a runnable Spanner emulator demo (`query_format.rb`) using `ClientTypeAdapter.adapt`, `encode_value`, and `format_result_row`. Setup: [`../examples/README.md`](../examples/README.md).
+
 ## License
 
 MIT

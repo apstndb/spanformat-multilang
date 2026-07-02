@@ -74,6 +74,10 @@ cd csharp && dotnet test
 
 Conformance cases load `../testdata/conformance.json`.
 
+## Integration example
+
+See [`../examples/csharp/`](../examples/csharp/) for a runnable Spanner emulator demo using `ValueEncoder.AdaptClientType`, `EncodeValue`, and `FormatResultRow`. Setup: [`../examples/README.md`](../examples/README.md).
+
 ## License
 
 MIT

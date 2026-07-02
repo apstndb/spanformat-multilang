@@ -59,6 +59,10 @@ cd cpp && cmake -B build && cmake --build build && ctest --test-dir build
 
 Conformance cases load `../testdata/conformance.json`.
 
+## Integration example
+
+See [`../examples/cpp/`](../examples/cpp/) for a runnable Spanner emulator demo using `adapt_client_type`, `encode_value`, and `format_result_row` with `google::cloud::spanner::Client`. Requires google-cloud-cpp. Setup: [`../examples/README.md`](../examples/README.md).
+
 ## License
 
 MIT
