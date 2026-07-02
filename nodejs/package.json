@@ -11,6 +11,11 @@
     "test": "node --test test/*.test.js"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apstndb/spanformat-multilang.git"
+  },
+  "homepage": "https://github.com/apstndb/spanformat-multilang",
   "engines": {
     "node": ">=18"
   }

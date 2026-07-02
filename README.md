@@ -18,6 +18,48 @@ This repository ports two Go libraries to other languages:
   [spanner-cli](https://github.com/cloudspannerecosystem/spanner-cli)
   compatible output.
 
+## Input model
+
+Formatting is defined on the Spanner **wire** representation (see
+[`spec/FORMAT.md`](spec/FORMAT.md) §1):
+
+- **Type** — `google.spanner.v1.Type` (`code`, optional `array_element_type`,
+  `struct_type.fields[]`, `proto_type_fqn`, `type_annotation`).
+- **Value** — `google.protobuf.Value` (Spanner encodes each column by type:
+  `string_value` for INT64/STRING/ENUM, `list_value` for ARRAY/STRUCT, etc.).
+
+This pair is the core API every port targets. In practice, callers pass either:
+
+1. **Protobuf messages** from the official client (where the port supports
+   duck-typing or direct proto types), or
+2. **Protojson-shaped data** — plain dicts/objects/JSON with snake_case or
+   camelCase keys. Conformance tests use this form; it also accepts plain JSON
+   shorthand for values (e.g. bare `"42"` or `["1", "foo"]` for STRUCT, not only
+   `{ "stringValue": "42" }` wrappers).
+
+### High-level client row values
+
+Official Spanner client libraries expose ergonomic row types (`Struct`,
+`GenericColumnValue`, typed getters, etc.) that are **not** wire-shaped. None of
+the ports accept those directly today — you must convert to wire
+`(google.spanner.v1.Type, google.protobuf.Value)` first (a gcvctor-style encoder
+is planned future work; Go upstream handles this via
+`spanvalue.GenericColumnValue`).
+
+### Per-language input support
+
+| Language | Type inputs | Value inputs | Notes |
+|---|---|---|---|
+| Go | (upstream) | (upstream) | Reference implementation; full client integration |
+| Python | protojson dict, duck-typed protos | protojson, duck-typed protos | Optional `google-cloud-spanner` protos; see [`python/README.md`](python/README.md) |
+| Java | protojson `Map`, `com.google.spanner.v1.Type` | protojson, `com.google.protobuf.Value` | **No** `com.google.cloud.spanner.Type` STRUCT support — wire proto only; see [`java/README.md`](java/README.md) |
+| Node.js | plain objects, duck-typed protos | plain JS + arrays, duck-typed protos | Structural compatibility with `@google-cloud/spanner` protos; see [`nodejs/README.md`](nodejs/README.md) |
+| Ruby | `Hash`, duck-typed protos | arrays, `Hash`, duck-typed protos | See [`ruby/README.md`](ruby/README.md) |
+| PHP | arrays, duck-typed protos | arrays, duck-typed protos | Protojson primary; protobuf duck-typing thinner than Java; see [`php/README.md`](php/README.md) |
+| C# | protojson (`JsonElement`, dict) | protojson (`JsonElement`, dict) | No direct `Google.Protobuf` message adapters yet; see [`csharp/README.md`](csharp/README.md) |
+| Rust | native `spanvalue::Type` | native `spanvalue::Value` | serde_json in tests only; no prost/google-cloud-spanner adapters; see [`rust/README.md`](rust/README.md) |
+| C++ | `nlohmann::json` | `nlohmann::json` | JSON/protojson only; no protobuf C++ types yet; see [`cpp/README.md`](cpp/README.md) |
+
 ## Languages
 
 Official Spanner client libraries exist for C++, C#, Go, Java, Node.js, PHP,
@@ -26,17 +68,17 @@ Python, and Ruby (see the
 plus the preview Rust client in
 [googleapis/google-cloud-rust](https://github.com/googleapis/google-cloud-rust).
 
-| Language | Directory | Package | Official client integration |
-|---|---|---|---|
-| Go | (upstream) | [`apstndb/spantype`](https://github.com/apstndb/spantype), [`apstndb/spanvalue`](https://github.com/apstndb/spanvalue) | `cloud.google.com/go/spanner` (`GenericColumnValue`, `*spanner.Row`) |
-| C++ | [`cpp/`](cpp/) | `spanvalue` (header-first, CMake) | duck-typed templates over `google::spanner::v1` protos |
-| C# | [`csharp/`](csharp/) | `Apstndb.SpanValue` | `Google.Cloud.Spanner.V1.Type` + `Google.Protobuf.WellKnownTypes.Value` |
-| Java | [`java/`](java/) | `com.github.apstndb:spanvalue` | `com.google.spanner.v1.Type` + `com.google.protobuf.Value` |
-| Node.js | [`nodejs/`](nodejs/) | `@apstndb/spanvalue` | structural types compatible with `@google-cloud/spanner` protos |
-| PHP | [`php/`](php/) | `apstndb/spanvalue` | protojson arrays + duck-typed `Google\Cloud\Spanner\V1` protos |
-| Python | [`python/`](python/) | `spanvalue` | protojson data + duck-typed `google.cloud.spanner_v1` protos |
-| Ruby | [`ruby/`](ruby/) | `spanvalue` | protojson hashes + duck-typed `Google::Cloud::Spanner::V1` protos |
-| Rust | [`rust/`](rust/) | `spanvalue` | conversions for `google-cloud-spanner` / `google-cloud-wkt` (preview) |
+| Language | Directory | Package |
+|---|---|---|
+| Go | (upstream) | [`apstndb/spantype`](https://github.com/apstndb/spantype), [`apstndb/spanvalue`](https://github.com/apstndb/spanvalue) |
+| C++ | [`cpp/`](cpp/) | `spanvalue` (header-first, CMake) |
+| C# | [`csharp/`](csharp/) | `Apstndb.SpanValue` |
+| Java | [`java/`](java/) | `com.github.apstndb:spanvalue` |
+| Node.js | [`nodejs/`](nodejs/) | `@apstndb/spanvalue` |
+| PHP | [`php/`](php/) | `apstndb/spanvalue` |
+| Python | [`python/`](python/) | `spanvalue` |
+| Ruby | [`ruby/`](ruby/) | `spanvalue` |
+| Rust | [`rust/`](rust/) | `spanvalue` |
 
 Go is served by the upstream libraries themselves; they are also the reference
 implementation that generates this repository's conformance data.

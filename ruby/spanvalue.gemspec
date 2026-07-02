@@ -11,6 +11,9 @@ Gem::Specification.new do |spec|
   spec.summary = 'Format Cloud Spanner types and column values'
   spec.description = 'Format Cloud Spanner google.spanner.v1.Type and google.protobuf.Value values'
   spec.homepage = 'https://github.com/apstndb/spanformat-multilang'
+  spec.metadata = {
+    'source_code_uri' => 'https://github.com/apstndb/spanformat-multilang'
+  }
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 3.2'
 

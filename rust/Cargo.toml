@@ -4,6 +4,8 @@ version = "0.1.0-alpha.0"
 edition = "2021"
 description = "Format Cloud Spanner types and column values"
 license = "MIT"
+repository = "https://github.com/apstndb/spanformat-multilang"
+homepage = "https://github.com/apstndb/spanformat-multilang"
 
 [dependencies]
 

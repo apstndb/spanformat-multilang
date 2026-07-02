@@ -57,6 +57,10 @@ print(format_value(row_type, row_value, spanner_cli_format_config()))
 The library accepts protojson dicts **and** duck-typed protobuf objects from the
 official client. No hard dependency on `google-cloud-spanner` is required.
 
+**Note:** high-level client row types (`Struct`, typed column getters) are not
+wire-shaped. Convert to `(google.spanner.v1.Type, google.protobuf.Value)` before
+formatting — a convenience encoder is planned future work.
+
 ```python
 from google.cloud.spanner_v1.types import Type, TypeCode, StructType
 from google.protobuf.struct_pb2 import Value, ListValue

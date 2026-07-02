@@ -4,6 +4,10 @@
     "version": "0.1.0-alpha.0",
     "type": "library",
     "license": "MIT",
+    "homepage": "https://github.com/apstndb/spanformat-multilang",
+    "support": {
+        "source": "https://github.com/apstndb/spanformat-multilang"
+    },
     "authors": [
         {
             "name": "apstndb"
