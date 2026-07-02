@@ -1,0 +1,2865 @@
+{
+  "spec_version": "0.1.0",
+  "type_cases": [
+    {
+      "name": "unspecified",
+      "type": {},
+      "expected": {
+        "simplest": "TYPE_CODE_UNSPECIFIED",
+        "simple": "TYPE_CODE_UNSPECIFIED",
+        "normal": "TYPE_CODE_UNSPECIFIED",
+        "verbose": "TYPE_CODE_UNSPECIFIED",
+        "more_verbose": "TYPE_CODE_UNSPECIFIED",
+        "verbose_annotation_omit": "TYPE_CODE_UNSPECIFIED",
+        "verbose_annotation_primary": "TYPE_CODE_UNSPECIFIED"
+      }
+    },
+    {
+      "name": "bool",
+      "type": {
+        "code": "BOOL"
+      },
+      "expected": {
+        "simplest": "BOOL",
+        "simple": "BOOL",
+        "normal": "BOOL",
+        "verbose": "BOOL",
+        "more_verbose": "BOOL",
+        "verbose_annotation_omit": "BOOL",
+        "verbose_annotation_primary": "BOOL"
+      }
+    },
+    {
+      "name": "int64",
+      "type": {
+        "code": "INT64"
+      },
+      "expected": {
+        "simplest": "INT64",
+        "simple": "INT64",
+        "normal": "INT64",
+        "verbose": "INT64",
+        "more_verbose": "INT64",
+        "verbose_annotation_omit": "INT64",
+        "verbose_annotation_primary": "INT64"
+      }
+    },
+    {
+      "name": "float32",
+      "type": {
+        "code": "FLOAT32"
+      },
+      "expected": {
+        "simplest": "FLOAT32",
+        "simple": "FLOAT32",
+        "normal": "FLOAT32",
+        "verbose": "FLOAT32",
+        "more_verbose": "FLOAT32",
+        "verbose_annotation_omit": "FLOAT32",
+        "verbose_annotation_primary": "FLOAT32"
+      }
+    },
+    {
+      "name": "float64",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "expected": {
+        "simplest": "FLOAT64",
+        "simple": "FLOAT64",
+        "normal": "FLOAT64",
+        "verbose": "FLOAT64",
+        "more_verbose": "FLOAT64",
+        "verbose_annotation_omit": "FLOAT64",
+        "verbose_annotation_primary": "FLOAT64"
+      }
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "code": "TIMESTAMP"
+      },
+      "expected": {
+        "simplest": "TIMESTAMP",
+        "simple": "TIMESTAMP",
+        "normal": "TIMESTAMP",
+        "verbose": "TIMESTAMP",
+        "more_verbose": "TIMESTAMP",
+        "verbose_annotation_omit": "TIMESTAMP",
+        "verbose_annotation_primary": "TIMESTAMP"
+      }
+    },
+    {
+      "name": "date",
+      "type": {
+        "code": "DATE"
+      },
+      "expected": {
+        "simplest": "DATE",
+        "simple": "DATE",
+        "normal": "DATE",
+        "verbose": "DATE",
+        "more_verbose": "DATE",
+        "verbose_annotation_omit": "DATE",
+        "verbose_annotation_primary": "DATE"
+      }
+    },
+    {
+      "name": "string",
+      "type": {
+        "code": "STRING"
+      },
+      "expected": {
+        "simplest": "STRING",
+        "simple": "STRING",
+        "normal": "STRING",
+        "verbose": "STRING",
+        "more_verbose": "STRING",
+        "verbose_annotation_omit": "STRING",
+        "verbose_annotation_primary": "STRING"
+      }
+    },
+    {
+      "name": "bytes",
+      "type": {
+        "code": "BYTES"
+      },
+      "expected": {
+        "simplest": "BYTES",
+        "simple": "BYTES",
+        "normal": "BYTES",
+        "verbose": "BYTES",
+        "more_verbose": "BYTES",
+        "verbose_annotation_omit": "BYTES",
+        "verbose_annotation_primary": "BYTES"
+      }
+    },
+    {
+      "name": "numeric",
+      "type": {
+        "code": "NUMERIC"
+      },
+      "expected": {
+        "simplest": "NUMERIC",
+        "simple": "NUMERIC",
+        "normal": "NUMERIC",
+        "verbose": "NUMERIC",
+        "more_verbose": "NUMERIC",
+        "verbose_annotation_omit": "NUMERIC",
+        "verbose_annotation_primary": "NUMERIC"
+      }
+    },
+    {
+      "name": "json",
+      "type": {
+        "code": "JSON"
+      },
+      "expected": {
+        "simplest": "JSON",
+        "simple": "JSON",
+        "normal": "JSON",
+        "verbose": "JSON",
+        "more_verbose": "JSON",
+        "verbose_annotation_omit": "JSON",
+        "verbose_annotation_primary": "JSON"
+      }
+    },
+    {
+      "name": "interval",
+      "type": {
+        "code": "INTERVAL"
+      },
+      "expected": {
+        "simplest": "INTERVAL",
+        "simple": "INTERVAL",
+        "normal": "INTERVAL",
+        "verbose": "INTERVAL",
+        "more_verbose": "INTERVAL",
+        "verbose_annotation_omit": "INTERVAL",
+        "verbose_annotation_primary": "INTERVAL"
+      }
+    },
+    {
+      "name": "uuid",
+      "type": {
+        "code": "UUID"
+      },
+      "expected": {
+        "simplest": "UUID",
+        "simple": "UUID",
+        "normal": "UUID",
+        "verbose": "UUID",
+        "more_verbose": "UUID",
+        "verbose_annotation_omit": "UUID",
+        "verbose_annotation_primary": "UUID"
+      }
+    },
+    {
+      "name": "proto",
+      "type": {
+        "code": "PROTO",
+        "protoTypeFqn": "examples.Book"
+      },
+      "expected": {
+        "simplest": "PROTO",
+        "simple": "Book",
+        "normal": "Book",
+        "verbose": "examples.Book",
+        "more_verbose": "PROTO\u003cexamples.Book\u003e",
+        "verbose_annotation_omit": "examples.Book",
+        "verbose_annotation_primary": "examples.Book"
+      }
+    },
+    {
+      "name": "proto_no_package",
+      "type": {
+        "code": "PROTO",
+        "protoTypeFqn": "Book"
+      },
+      "expected": {
+        "simplest": "PROTO",
+        "simple": "Book",
+        "normal": "Book",
+        "verbose": "Book",
+        "more_verbose": "PROTO\u003cBook\u003e",
+        "verbose_annotation_omit": "Book",
+        "verbose_annotation_primary": "Book"
+      }
+    },
+    {
+      "name": "enum",
+      "type": {
+        "code": "ENUM",
+        "protoTypeFqn": "examples.Genre"
+      },
+      "expected": {
+        "simplest": "ENUM",
+        "simple": "Genre",
+        "normal": "Genre",
+        "verbose": "examples.Genre",
+        "more_verbose": "ENUM\u003cexamples.Genre\u003e",
+        "verbose_annotation_omit": "examples.Genre",
+        "verbose_annotation_primary": "examples.Genre"
+      }
+    },
+    {
+      "name": "array_int64",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "INT64"
+        }
+      },
+      "expected": {
+        "simplest": "ARRAY",
+        "simple": "ARRAY\u003cINT64\u003e",
+        "normal": "ARRAY\u003cINT64\u003e",
+        "verbose": "ARRAY\u003cINT64\u003e",
+        "more_verbose": "ARRAY\u003cINT64\u003e",
+        "verbose_annotation_omit": "ARRAY\u003cINT64\u003e",
+        "verbose_annotation_primary": "ARRAY\u003cINT64\u003e"
+      }
+    },
+    {
+      "name": "array_array_int64",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "ARRAY",
+          "arrayElementType": {
+            "code": "INT64"
+          }
+        }
+      },
+      "expected": {
+        "simplest": "ARRAY",
+        "simple": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e",
+        "normal": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e",
+        "verbose": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e",
+        "more_verbose": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e",
+        "verbose_annotation_omit": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e",
+        "verbose_annotation_primary": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e"
+      }
+    },
+    {
+      "name": "array_proto",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "PROTO",
+          "protoTypeFqn": "examples.Book"
+        }
+      },
+      "expected": {
+        "simplest": "ARRAY",
+        "simple": "ARRAY\u003cBook\u003e",
+        "normal": "ARRAY\u003cBook\u003e",
+        "verbose": "ARRAY\u003cexamples.Book\u003e",
+        "more_verbose": "ARRAY\u003cPROTO\u003cexamples.Book\u003e\u003e",
+        "verbose_annotation_omit": "ARRAY\u003cexamples.Book\u003e",
+        "verbose_annotation_primary": "ARRAY\u003cexamples.Book\u003e"
+      }
+    },
+    {
+      "name": "array_struct",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "STRUCT",
+          "structType": {
+            "fields": [
+              {
+                "name": "n",
+                "type": {
+                  "code": "INT64"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "expected": {
+        "simplest": "ARRAY",
+        "simple": "ARRAY\u003cSTRUCT\u003e",
+        "normal": "ARRAY\u003cSTRUCT\u003cINT64\u003e\u003e",
+        "verbose": "ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e",
+        "more_verbose": "ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e",
+        "verbose_annotation_omit": "ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e",
+        "verbose_annotation_primary": "ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e"
+      }
+    },
+    {
+      "name": "struct_empty",
+      "type": {
+        "code": "STRUCT",
+        "structType": {}
+      },
+      "expected": {
+        "simplest": "STRUCT",
+        "simple": "STRUCT",
+        "normal": "STRUCT\u003c\u003e",
+        "verbose": "STRUCT\u003c\u003e",
+        "more_verbose": "STRUCT\u003c\u003e",
+        "verbose_annotation_omit": "STRUCT\u003c\u003e",
+        "verbose_annotation_primary": "STRUCT\u003c\u003e"
+      }
+    },
+    {
+      "name": "struct_named",
+      "type": {
+        "code": "STRUCT",
+        "structType": {
+          "fields": [
+            {
+              "name": "n",
+              "type": {
+                "code": "INT64"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "code": "STRING"
+              }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "simplest": "STRUCT",
+        "simple": "STRUCT",
+        "normal": "STRUCT\u003cINT64, STRING\u003e",
+        "verbose": "STRUCT\u003cn INT64, s STRING\u003e",
+        "more_verbose": "STRUCT\u003cn INT64, s STRING\u003e",
+        "verbose_annotation_omit": "STRUCT\u003cn INT64, s STRING\u003e",
+        "verbose_annotation_primary": "STRUCT\u003cn INT64, s STRING\u003e"
+      }
+    },
+    {
+      "name": "struct_unnamed",
+      "type": {
+        "code": "STRUCT",
+        "structType": {
+          "fields": [
+            {
+              "type": {
+                "code": "INT64"
+              }
+            },
+            {
+              "type": {
+                "code": "STRING"
+              }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "simplest": "STRUCT",
+        "simple": "STRUCT",
+        "normal": "STRUCT\u003cINT64, STRING\u003e",
+        "verbose": "STRUCT\u003cINT64, STRING\u003e",
+        "more_verbose": "STRUCT\u003cINT64, STRING\u003e",
+        "verbose_annotation_omit": "STRUCT\u003cINT64, STRING\u003e",
+        "verbose_annotation_primary": "STRUCT\u003cINT64, STRING\u003e"
+      }
+    },
+    {
+      "name": "struct_readme_example",
+      "type": {
+        "code": "STRUCT",
+        "structType": {
+          "fields": [
+            {
+              "name": "arr",
+              "type": {
+                "code": "ARRAY",
+                "arrayElementType": {
+                  "code": "STRUCT",
+                  "structType": {
+                    "fields": [
+                      {
+                        "name": "n",
+                        "type": {
+                          "code": "INT64"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "name": "proto",
+              "type": {
+                "code": "PROTO",
+                "protoTypeFqn": "examples.Book"
+              }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "simplest": "STRUCT",
+        "simple": "STRUCT",
+        "normal": "STRUCT\u003cARRAY\u003cSTRUCT\u003cINT64\u003e\u003e, Book\u003e",
+        "verbose": "STRUCT\u003carr ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e, proto examples.Book\u003e",
+        "more_verbose": "STRUCT\u003carr ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e, proto PROTO\u003cexamples.Book\u003e\u003e",
+        "verbose_annotation_omit": "STRUCT\u003carr ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e, proto examples.Book\u003e",
+        "verbose_annotation_primary": "STRUCT\u003carr ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e, proto examples.Book\u003e"
+      }
+    },
+    {
+      "name": "pg_numeric",
+      "type": {
+        "code": "NUMERIC",
+        "typeAnnotation": "PG_NUMERIC"
+      },
+      "expected": {
+        "simplest": "NUMERIC(PG_NUMERIC)",
+        "simple": "NUMERIC(PG_NUMERIC)",
+        "normal": "NUMERIC(PG_NUMERIC)",
+        "verbose": "NUMERIC(PG_NUMERIC)",
+        "more_verbose": "NUMERIC(PG_NUMERIC)",
+        "verbose_annotation_omit": "NUMERIC",
+        "verbose_annotation_primary": "PG_NUMERIC"
+      }
+    },
+    {
+      "name": "pg_jsonb",
+      "type": {
+        "code": "JSON",
+        "typeAnnotation": "PG_JSONB"
+      },
+      "expected": {
+        "simplest": "JSON(PG_JSONB)",
+        "simple": "JSON(PG_JSONB)",
+        "normal": "JSON(PG_JSONB)",
+        "verbose": "JSON(PG_JSONB)",
+        "more_verbose": "JSON(PG_JSONB)",
+        "verbose_annotation_omit": "JSON",
+        "verbose_annotation_primary": "PG_JSONB"
+      }
+    },
+    {
+      "name": "pg_oid",
+      "type": {
+        "code": "INT64",
+        "typeAnnotation": "PG_OID"
+      },
+      "expected": {
+        "simplest": "INT64(PG_OID)",
+        "simple": "INT64(PG_OID)",
+        "normal": "INT64(PG_OID)",
+        "verbose": "INT64(PG_OID)",
+        "more_verbose": "INT64(PG_OID)",
+        "verbose_annotation_omit": "INT64",
+        "verbose_annotation_primary": "PG_OID"
+      }
+    },
+    {
+      "name": "array_pg_numeric",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "NUMERIC",
+          "typeAnnotation": "PG_NUMERIC"
+        }
+      },
+      "expected": {
+        "simplest": "ARRAY",
+        "simple": "ARRAY\u003cNUMERIC(PG_NUMERIC)\u003e",
+        "normal": "ARRAY\u003cNUMERIC(PG_NUMERIC)\u003e",
+        "verbose": "ARRAY\u003cNUMERIC(PG_NUMERIC)\u003e",
+        "more_verbose": "ARRAY\u003cNUMERIC(PG_NUMERIC)\u003e",
+        "verbose_annotation_omit": "ARRAY\u003cNUMERIC\u003e",
+        "verbose_annotation_primary": "ARRAY\u003cPG_NUMERIC\u003e"
+      }
+    },
+    {
+      "name": "struct_with_pg_field",
+      "type": {
+        "code": "STRUCT",
+        "structType": {
+          "fields": [
+            {
+              "name": "n",
+              "type": {
+                "code": "NUMERIC",
+                "typeAnnotation": "PG_NUMERIC"
+              }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "simplest": "STRUCT",
+        "simple": "STRUCT",
+        "normal": "STRUCT\u003cNUMERIC(PG_NUMERIC)\u003e",
+        "verbose": "STRUCT\u003cn NUMERIC(PG_NUMERIC)\u003e",
+        "more_verbose": "STRUCT\u003cn NUMERIC(PG_NUMERIC)\u003e",
+        "verbose_annotation_omit": "STRUCT\u003cn NUMERIC\u003e",
+        "verbose_annotation_primary": "STRUCT\u003cn PG_NUMERIC\u003e"
+      }
+    },
+    {
+      "name": "unknown_positive",
+      "type": {
+        "code": 999
+      },
+      "expected": {
+        "simplest": "999",
+        "simple": "UNKNOWN",
+        "normal": "UNKNOWN(999)",
+        "verbose": "UNKNOWN(999)",
+        "more_verbose": "UNKNOWN(999)",
+        "verbose_annotation_omit": "UNKNOWN(999)",
+        "verbose_annotation_primary": "UNKNOWN(999)"
+      }
+    },
+    {
+      "name": "unknown_negative",
+      "type": {
+        "code": -1
+      },
+      "expected": {
+        "simplest": "-1",
+        "simple": "UNKNOWN",
+        "normal": "UNKNOWN(-1)",
+        "verbose": "UNKNOWN(-1)",
+        "more_verbose": "UNKNOWN(-1)",
+        "verbose_annotation_omit": "UNKNOWN(-1)",
+        "verbose_annotation_primary": "UNKNOWN(-1)"
+      }
+    }
+  ],
+  "value_cases": [
+    {
+      "name": "bool_true",
+      "type": {
+        "code": "BOOL"
+      },
+      "value": true,
+      "expected": {
+        "simple": "true",
+        "literal": "true",
+        "spanner_cli": "true",
+        "literal_quotes": {
+          "legacy_double": "true",
+          "legacy_single": "true",
+          "always_double": "true",
+          "always_single": "true",
+          "min_escape_double": "true",
+          "min_escape_single": "true"
+        }
+      }
+    },
+    {
+      "name": "bool_false",
+      "type": {
+        "code": "BOOL"
+      },
+      "value": false,
+      "expected": {
+        "simple": "false",
+        "literal": "false",
+        "spanner_cli": "false",
+        "literal_quotes": {
+          "legacy_double": "false",
+          "legacy_single": "false",
+          "always_double": "false",
+          "always_single": "false",
+          "min_escape_double": "false",
+          "min_escape_single": "false"
+        }
+      }
+    },
+    {
+      "name": "bool_null",
+      "type": {
+        "code": "BOOL"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "int64_positive",
+      "type": {
+        "code": "INT64"
+      },
+      "value": "1",
+      "expected": {
+        "simple": "1",
+        "literal": "1",
+        "spanner_cli": "1",
+        "literal_quotes": {
+          "legacy_double": "1",
+          "legacy_single": "1",
+          "always_double": "1",
+          "always_single": "1",
+          "min_escape_double": "1",
+          "min_escape_single": "1"
+        }
+      }
+    },
+    {
+      "name": "int64_min",
+      "type": {
+        "code": "INT64"
+      },
+      "value": "-9223372036854775808",
+      "expected": {
+        "simple": "-9223372036854775808",
+        "literal": "-9223372036854775808",
+        "spanner_cli": "-9223372036854775808",
+        "literal_quotes": {
+          "legacy_double": "-9223372036854775808",
+          "legacy_single": "-9223372036854775808",
+          "always_double": "-9223372036854775808",
+          "always_single": "-9223372036854775808",
+          "min_escape_double": "-9223372036854775808",
+          "min_escape_single": "-9223372036854775808"
+        }
+      }
+    },
+    {
+      "name": "int64_max",
+      "type": {
+        "code": "INT64"
+      },
+      "value": "9223372036854775807",
+      "expected": {
+        "simple": "9223372036854775807",
+        "literal": "9223372036854775807",
+        "spanner_cli": "9223372036854775807",
+        "literal_quotes": {
+          "legacy_double": "9223372036854775807",
+          "legacy_single": "9223372036854775807",
+          "always_double": "9223372036854775807",
+          "always_single": "9223372036854775807",
+          "min_escape_double": "9223372036854775807",
+          "min_escape_single": "9223372036854775807"
+        }
+      }
+    },
+    {
+      "name": "int64_null",
+      "type": {
+        "code": "INT64"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "float64_pi",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 3.14,
+      "expected": {
+        "simple": "3.14",
+        "literal": "3.14",
+        "spanner_cli": "3.140000",
+        "literal_quotes": {
+          "legacy_double": "3.14",
+          "legacy_single": "3.14",
+          "always_double": "3.14",
+          "always_single": "3.14",
+          "min_escape_double": "3.14",
+          "min_escape_single": "3.14"
+        }
+      }
+    },
+    {
+      "name": "float64_zero",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 0,
+      "expected": {
+        "simple": "0",
+        "literal": "0.0",
+        "spanner_cli": "0",
+        "literal_quotes": {
+          "legacy_double": "0.0",
+          "legacy_single": "0.0",
+          "always_double": "0.0",
+          "always_single": "0.0",
+          "min_escape_double": "0.0",
+          "min_escape_single": "0.0"
+        }
+      }
+    },
+    {
+      "name": "float64_neg_zero",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": -0.0,
+      "expected": {
+        "simple": "-0",
+        "literal": "-0.0",
+        "spanner_cli": "-0",
+        "literal_quotes": {
+          "legacy_double": "-0.0",
+          "legacy_single": "-0.0",
+          "always_double": "-0.0",
+          "always_single": "-0.0",
+          "min_escape_double": "-0.0",
+          "min_escape_single": "-0.0"
+        }
+      }
+    },
+    {
+      "name": "float64_one",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 1,
+      "expected": {
+        "simple": "1",
+        "literal": "1.0",
+        "spanner_cli": "1",
+        "literal_quotes": {
+          "legacy_double": "1.0",
+          "legacy_single": "1.0",
+          "always_double": "1.0",
+          "always_single": "1.0",
+          "min_escape_double": "1.0",
+          "min_escape_single": "1.0"
+        }
+      }
+    },
+    {
+      "name": "float64_e5",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 100000,
+      "expected": {
+        "simple": "100000",
+        "literal": "100000.0",
+        "spanner_cli": "100000",
+        "literal_quotes": {
+          "legacy_double": "100000.0",
+          "legacy_single": "100000.0",
+          "always_double": "100000.0",
+          "always_single": "100000.0",
+          "min_escape_double": "100000.0",
+          "min_escape_single": "100000.0"
+        }
+      }
+    },
+    {
+      "name": "float64_e6",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 1000000,
+      "expected": {
+        "simple": "1e+06",
+        "literal": "1e+06",
+        "spanner_cli": "1000000",
+        "literal_quotes": {
+          "legacy_double": "1e+06",
+          "legacy_single": "1e+06",
+          "always_double": "1e+06",
+          "always_single": "1e+06",
+          "min_escape_double": "1e+06",
+          "min_escape_single": "1e+06"
+        }
+      }
+    },
+    {
+      "name": "float64_e21",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 1e+21,
+      "expected": {
+        "simple": "1e+21",
+        "literal": "1e+21",
+        "spanner_cli": "1000000000000000000000",
+        "literal_quotes": {
+          "legacy_double": "1e+21",
+          "legacy_single": "1e+21",
+          "always_double": "1e+21",
+          "always_single": "1e+21",
+          "min_escape_double": "1e+21",
+          "min_escape_single": "1e+21"
+        }
+      }
+    },
+    {
+      "name": "float64_e_minus_4",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 0.0001,
+      "expected": {
+        "simple": "0.0001",
+        "literal": "0.0001",
+        "spanner_cli": "0.000100",
+        "literal_quotes": {
+          "legacy_double": "0.0001",
+          "legacy_single": "0.0001",
+          "always_double": "0.0001",
+          "always_single": "0.0001",
+          "min_escape_double": "0.0001",
+          "min_escape_single": "0.0001"
+        }
+      }
+    },
+    {
+      "name": "float64_e_minus_5",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 0.00001,
+      "expected": {
+        "simple": "1e-05",
+        "literal": "1e-05",
+        "spanner_cli": "0.000010",
+        "literal_quotes": {
+          "legacy_double": "1e-05",
+          "legacy_single": "1e-05",
+          "always_double": "1e-05",
+          "always_single": "1e-05",
+          "min_escape_double": "1e-05",
+          "min_escape_single": "1e-05"
+        }
+      }
+    },
+    {
+      "name": "float64_max",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 1.7976931348623157e+308,
+      "expected": {
+        "simple": "1.7976931348623157e+308",
+        "literal": "1.7976931348623157e+308",
+        "spanner_cli": "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368",
+        "literal_quotes": {
+          "legacy_double": "1.7976931348623157e+308",
+          "legacy_single": "1.7976931348623157e+308",
+          "always_double": "1.7976931348623157e+308",
+          "always_single": "1.7976931348623157e+308",
+          "min_escape_double": "1.7976931348623157e+308",
+          "min_escape_single": "1.7976931348623157e+308"
+        }
+      }
+    },
+    {
+      "name": "float64_denormal_min",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 5e-324,
+      "expected": {
+        "simple": "5e-324",
+        "literal": "5e-324",
+        "spanner_cli": "0.000000",
+        "literal_quotes": {
+          "legacy_double": "5e-324",
+          "legacy_single": "5e-324",
+          "always_double": "5e-324",
+          "always_single": "5e-324",
+          "min_escape_double": "5e-324",
+          "min_escape_single": "5e-324"
+        }
+      }
+    },
+    {
+      "name": "float64_point_3",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 0.3,
+      "expected": {
+        "simple": "0.3",
+        "literal": "0.3",
+        "spanner_cli": "0.300000",
+        "literal_quotes": {
+          "legacy_double": "0.3",
+          "legacy_single": "0.3",
+          "always_double": "0.3",
+          "always_single": "0.3",
+          "min_escape_double": "0.3",
+          "min_escape_single": "0.3"
+        }
+      }
+    },
+    {
+      "name": "float64_seventeen_digits",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 0.30000000000000004,
+      "expected": {
+        "simple": "0.30000000000000004",
+        "literal": "0.30000000000000004",
+        "spanner_cli": "0.300000",
+        "literal_quotes": {
+          "legacy_double": "0.30000000000000004",
+          "legacy_single": "0.30000000000000004",
+          "always_double": "0.30000000000000004",
+          "always_single": "0.30000000000000004",
+          "min_escape_double": "0.30000000000000004",
+          "min_escape_single": "0.30000000000000004"
+        }
+      }
+    },
+    {
+      "name": "float64_fraction",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": 123456.789,
+      "expected": {
+        "simple": "123456.789",
+        "literal": "123456.789",
+        "spanner_cli": "123456.789000",
+        "literal_quotes": {
+          "legacy_double": "123456.789",
+          "legacy_single": "123456.789",
+          "always_double": "123456.789",
+          "always_single": "123456.789",
+          "min_escape_double": "123456.789",
+          "min_escape_single": "123456.789"
+        }
+      }
+    },
+    {
+      "name": "float64_neg",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": -42.5,
+      "expected": {
+        "simple": "-42.5",
+        "literal": "-42.5",
+        "spanner_cli": "-42.500000",
+        "literal_quotes": {
+          "legacy_double": "-42.5",
+          "legacy_single": "-42.5",
+          "always_double": "-42.5",
+          "always_single": "-42.5",
+          "min_escape_double": "-42.5",
+          "min_escape_single": "-42.5"
+        }
+      }
+    },
+    {
+      "name": "float64_nan",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": "NaN",
+      "expected": {
+        "simple": "NaN",
+        "literal": "CAST(\"nan\" AS FLOAT64)",
+        "spanner_cli": "NaN",
+        "literal_quotes": {
+          "legacy_double": "CAST(\"nan\" AS FLOAT64)",
+          "legacy_single": "CAST('nan' AS FLOAT64)",
+          "always_double": "CAST(\"nan\" AS FLOAT64)",
+          "always_single": "CAST('nan' AS FLOAT64)",
+          "min_escape_double": "CAST(\"nan\" AS FLOAT64)",
+          "min_escape_single": "CAST('nan' AS FLOAT64)"
+        }
+      }
+    },
+    {
+      "name": "float64_inf",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": "Infinity",
+      "expected": {
+        "simple": "+Inf",
+        "literal": "CAST(\"inf\" AS FLOAT64)",
+        "spanner_cli": "+Inf",
+        "literal_quotes": {
+          "legacy_double": "CAST(\"inf\" AS FLOAT64)",
+          "legacy_single": "CAST('inf' AS FLOAT64)",
+          "always_double": "CAST(\"inf\" AS FLOAT64)",
+          "always_single": "CAST('inf' AS FLOAT64)",
+          "min_escape_double": "CAST(\"inf\" AS FLOAT64)",
+          "min_escape_single": "CAST('inf' AS FLOAT64)"
+        }
+      }
+    },
+    {
+      "name": "float64_neg_inf",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": "-Infinity",
+      "expected": {
+        "simple": "-Inf",
+        "literal": "CAST(\"-inf\" AS FLOAT64)",
+        "spanner_cli": "-Inf",
+        "literal_quotes": {
+          "legacy_double": "CAST(\"-inf\" AS FLOAT64)",
+          "legacy_single": "CAST('-inf' AS FLOAT64)",
+          "always_double": "CAST(\"-inf\" AS FLOAT64)",
+          "always_single": "CAST('-inf' AS FLOAT64)",
+          "min_escape_double": "CAST(\"-inf\" AS FLOAT64)",
+          "min_escape_single": "CAST('-inf' AS FLOAT64)"
+        }
+      }
+    },
+    {
+      "name": "float64_null",
+      "type": {
+        "code": "FLOAT64"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "float32_pi",
+      "type": {
+        "code": "FLOAT32"
+      },
+      "value": 3.140000104904175,
+      "expected": {
+        "simple": "3.14",
+        "literal": "CAST(3.14 AS FLOAT32)",
+        "spanner_cli": "3.140000",
+        "literal_quotes": {
+          "legacy_double": "CAST(3.14 AS FLOAT32)",
+          "legacy_single": "CAST(3.14 AS FLOAT32)",
+          "always_double": "CAST(3.14 AS FLOAT32)",
+          "always_single": "CAST(3.14 AS FLOAT32)",
+          "min_escape_double": "CAST(3.14 AS FLOAT32)",
+          "min_escape_single": "CAST(3.14 AS FLOAT32)"
+        }
+      }
+    },
+    {
+      "name": "float32_point_1",
+      "type": {
+        "code": "FLOAT32"
+      },
+      "value": 0.10000000149011612,
+      "expected": {
+        "simple": "0.1",
+        "literal": "CAST(0.1 AS FLOAT32)",
+        "spanner_cli": "0.100000",
+        "literal_quotes": {
+          "legacy_double": "CAST(0.1 AS FLOAT32)",
+          "legacy_single": "CAST(0.1 AS FLOAT32)",
+          "always_double": "CAST(0.1 AS FLOAT32)",
+          "always_single": "CAST(0.1 AS FLOAT32)",
+          "min_escape_double": "CAST(0.1 AS FLOAT32)",
+          "min_escape_single": "CAST(0.1 AS FLOAT32)"
+        }
+      }
+    },
+    {
+      "name": "float32_max",
+      "type": {
+        "code": "FLOAT32"
+      },
+      "value": 3.4028234663852886e+38,
+      "expected": {
+        "simple": "3.4028235e+38",
+        "literal": "CAST(3.4028235e+38 AS FLOAT32)",
+        "spanner_cli": "340282346638528859811704183484516925440",
+        "literal_quotes": {
+          "legacy_double": "CAST(3.4028235e+38 AS FLOAT32)",
+          "legacy_single": "CAST(3.4028235e+38 AS FLOAT32)",
+          "always_double": "CAST(3.4028235e+38 AS FLOAT32)",
+          "always_single": "CAST(3.4028235e+38 AS FLOAT32)",
+          "min_escape_double": "CAST(3.4028235e+38 AS FLOAT32)",
+          "min_escape_single": "CAST(3.4028235e+38 AS FLOAT32)"
+        }
+      }
+    },
+    {
+      "name": "float32_min_normal",
+      "type": {
+        "code": "FLOAT32"
+      },
+      "value": 1.1754943508222875e-38,
+      "expected": {
+        "simple": "1.1754944e-38",
+        "literal": "CAST(1.1754944e-38 AS FLOAT32)",
+        "spanner_cli": "0.000000",
+        "literal_quotes": {
+          "legacy_double": "CAST(1.1754944e-38 AS FLOAT32)",
+          "legacy_single": "CAST(1.1754944e-38 AS FLOAT32)",
+          "always_double": "CAST(1.1754944e-38 AS FLOAT32)",
+          "always_single": "CAST(1.1754944e-38 AS FLOAT32)",
+          "min_escape_double": "CAST(1.1754944e-38 AS FLOAT32)",
+          "min_escape_single": "CAST(1.1754944e-38 AS FLOAT32)"
+        }
+      }
+    },
+    {
+      "name": "float32_one_and_half",
+      "type": {
+        "code": "FLOAT32"
+      },
+      "value": 1.5,
+      "expected": {
+        "simple": "1.5",
+        "literal": "CAST(1.5 AS FLOAT32)",
+        "spanner_cli": "1.500000",
+        "literal_quotes": {
+          "legacy_double": "CAST(1.5 AS FLOAT32)",
+          "legacy_single": "CAST(1.5 AS FLOAT32)",
+          "always_double": "CAST(1.5 AS FLOAT32)",
+          "always_single": "CAST(1.5 AS FLOAT32)",
+          "min_escape_double": "CAST(1.5 AS FLOAT32)",
+          "min_escape_single": "CAST(1.5 AS FLOAT32)"
+        }
+      }
+    },
+    {
+      "name": "float32_e6",
+      "type": {
+        "code": "FLOAT32"
+      },
+      "value": 1000000,
+      "expected": {
+        "simple": "1e+06",
+        "literal": "CAST(1e+06 AS FLOAT32)",
+        "spanner_cli": "1000000",
+        "literal_quotes": {
+          "legacy_double": "CAST(1e+06 AS FLOAT32)",
+          "legacy_single": "CAST(1e+06 AS FLOAT32)",
+          "always_double": "CAST(1e+06 AS FLOAT32)",
+          "always_single": "CAST(1e+06 AS FLOAT32)",
+          "min_escape_double": "CAST(1e+06 AS FLOAT32)",
+          "min_escape_single": "CAST(1e+06 AS FLOAT32)"
+        }
+      }
+    },
+    {
+      "name": "float32_nan",
+      "type": {
+        "code": "FLOAT32"
+      },
+      "value": "NaN",
+      "expected": {
+        "simple": "NaN",
+        "literal": "CAST(\"nan\" AS FLOAT32)",
+        "spanner_cli": "NaN",
+        "literal_quotes": {
+          "legacy_double": "CAST(\"nan\" AS FLOAT32)",
+          "legacy_single": "CAST('nan' AS FLOAT32)",
+          "always_double": "CAST(\"nan\" AS FLOAT32)",
+          "always_single": "CAST('nan' AS FLOAT32)",
+          "min_escape_double": "CAST(\"nan\" AS FLOAT32)",
+          "min_escape_single": "CAST('nan' AS FLOAT32)"
+        }
+      }
+    },
+    {
+      "name": "float32_inf",
+      "type": {
+        "code": "FLOAT32"
+      },
+      "value": "Infinity",
+      "expected": {
+        "simple": "+Inf",
+        "literal": "CAST(\"inf\" AS FLOAT32)",
+        "spanner_cli": "+Inf",
+        "literal_quotes": {
+          "legacy_double": "CAST(\"inf\" AS FLOAT32)",
+          "legacy_single": "CAST('inf' AS FLOAT32)",
+          "always_double": "CAST(\"inf\" AS FLOAT32)",
+          "always_single": "CAST('inf' AS FLOAT32)",
+          "min_escape_double": "CAST(\"inf\" AS FLOAT32)",
+          "min_escape_single": "CAST('inf' AS FLOAT32)"
+        }
+      }
+    },
+    {
+      "name": "float32_neg_inf",
+      "type": {
+        "code": "FLOAT32"
+      },
+      "value": "-Infinity",
+      "expected": {
+        "simple": "-Inf",
+        "literal": "CAST(\"-inf\" AS FLOAT32)",
+        "spanner_cli": "-Inf",
+        "literal_quotes": {
+          "legacy_double": "CAST(\"-inf\" AS FLOAT32)",
+          "legacy_single": "CAST('-inf' AS FLOAT32)",
+          "always_double": "CAST(\"-inf\" AS FLOAT32)",
+          "always_single": "CAST('-inf' AS FLOAT32)",
+          "min_escape_double": "CAST(\"-inf\" AS FLOAT32)",
+          "min_escape_single": "CAST('-inf' AS FLOAT32)"
+        }
+      }
+    },
+    {
+      "name": "float32_null",
+      "type": {
+        "code": "FLOAT32"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "string_empty",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "",
+      "expected": {
+        "simple": "",
+        "literal": "\"\"",
+        "spanner_cli": "",
+        "literal_quotes": {
+          "legacy_double": "\"\"",
+          "legacy_single": "''",
+          "always_double": "\"\"",
+          "always_single": "''",
+          "min_escape_double": "\"\"",
+          "min_escape_single": "''"
+        }
+      }
+    },
+    {
+      "name": "string_plain",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "foo",
+      "expected": {
+        "simple": "foo",
+        "literal": "\"foo\"",
+        "spanner_cli": "foo",
+        "literal_quotes": {
+          "legacy_double": "\"foo\"",
+          "legacy_single": "'foo'",
+          "always_double": "\"foo\"",
+          "always_single": "'foo'",
+          "min_escape_double": "\"foo\"",
+          "min_escape_single": "'foo'"
+        }
+      }
+    },
+    {
+      "name": "string_single_quote",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "It's",
+      "expected": {
+        "simple": "It's",
+        "literal": "\"It's\"",
+        "spanner_cli": "It's",
+        "literal_quotes": {
+          "legacy_double": "\"It's\"",
+          "legacy_single": "\"It's\"",
+          "always_double": "\"It's\"",
+          "always_single": "'It\\'s'",
+          "min_escape_double": "\"It's\"",
+          "min_escape_single": "\"It's\""
+        }
+      }
+    },
+    {
+      "name": "string_double_quote",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "say \"hi\"",
+      "expected": {
+        "simple": "say \"hi\"",
+        "literal": "'say \"hi\"'",
+        "spanner_cli": "say \"hi\"",
+        "literal_quotes": {
+          "legacy_double": "'say \"hi\"'",
+          "legacy_single": "'say \"hi\"'",
+          "always_double": "\"say \\\"hi\\\"\"",
+          "always_single": "'say \"hi\"'",
+          "min_escape_double": "'say \"hi\"'",
+          "min_escape_single": "'say \"hi\"'"
+        }
+      }
+    },
+    {
+      "name": "string_both_quotes",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "a''b\"c",
+      "expected": {
+        "simple": "a''b\"c",
+        "literal": "\"a''b\\\"c\"",
+        "spanner_cli": "a''b\"c",
+        "literal_quotes": {
+          "legacy_double": "\"a''b\\\"c\"",
+          "legacy_single": "'a\\'\\'b\"c'",
+          "always_double": "\"a''b\\\"c\"",
+          "always_single": "'a\\'\\'b\"c'",
+          "min_escape_double": "\"a''b\\\"c\"",
+          "min_escape_single": "\"a''b\\\"c\""
+        }
+      }
+    },
+    {
+      "name": "string_newline",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "line\nbreak",
+      "expected": {
+        "simple": "line\nbreak",
+        "literal": "\"line\\nbreak\"",
+        "spanner_cli": "line\nbreak",
+        "literal_quotes": {
+          "legacy_double": "\"line\\nbreak\"",
+          "legacy_single": "'line\\nbreak'",
+          "always_double": "\"line\\nbreak\"",
+          "always_single": "'line\\nbreak'",
+          "min_escape_double": "\"line\\nbreak\"",
+          "min_escape_single": "'line\\nbreak'"
+        }
+      }
+    },
+    {
+      "name": "string_tab_cr",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "tab\there\rcr",
+      "expected": {
+        "simple": "tab\there\rcr",
+        "literal": "\"tab\\there\\rcr\"",
+        "spanner_cli": "tab\there\rcr",
+        "literal_quotes": {
+          "legacy_double": "\"tab\\there\\rcr\"",
+          "legacy_single": "'tab\\there\\rcr'",
+          "always_double": "\"tab\\there\\rcr\"",
+          "always_single": "'tab\\there\\rcr'",
+          "min_escape_double": "\"tab\\there\\rcr\"",
+          "min_escape_single": "'tab\\there\\rcr'"
+        }
+      }
+    },
+    {
+      "name": "string_backslash",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "back\\slash",
+      "expected": {
+        "simple": "back\\slash",
+        "literal": "\"back\\\\slash\"",
+        "spanner_cli": "back\\slash",
+        "literal_quotes": {
+          "legacy_double": "\"back\\\\slash\"",
+          "legacy_single": "'back\\\\slash'",
+          "always_double": "\"back\\\\slash\"",
+          "always_single": "'back\\\\slash'",
+          "min_escape_double": "\"back\\\\slash\"",
+          "min_escape_single": "'back\\\\slash'"
+        }
+      }
+    },
+    {
+      "name": "string_japanese",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "日本語",
+      "expected": {
+        "simple": "日本語",
+        "literal": "\"日本語\"",
+        "spanner_cli": "日本語",
+        "literal_quotes": {
+          "legacy_double": "\"日本語\"",
+          "legacy_single": "'日本語'",
+          "always_double": "\"日本語\"",
+          "always_single": "'日本語'",
+          "min_escape_double": "\"日本語\"",
+          "min_escape_single": "'日本語'"
+        }
+      }
+    },
+    {
+      "name": "string_emoji",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "😀",
+      "expected": {
+        "simple": "😀",
+        "literal": "\"😀\"",
+        "spanner_cli": "😀",
+        "literal_quotes": {
+          "legacy_double": "\"😀\"",
+          "legacy_single": "'😀'",
+          "always_double": "\"😀\"",
+          "always_single": "'😀'",
+          "min_escape_double": "\"😀\"",
+          "min_escape_single": "'😀'"
+        }
+      }
+    },
+    {
+      "name": "string_control",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "a\u0001b",
+      "expected": {
+        "simple": "a\u0001b",
+        "literal": "\"a\\x01b\"",
+        "spanner_cli": "a\u0001b",
+        "literal_quotes": {
+          "legacy_double": "\"a\\x01b\"",
+          "legacy_single": "'a\\x01b'",
+          "always_double": "\"a\\x01b\"",
+          "always_single": "'a\\x01b'",
+          "min_escape_double": "\"a\\x01b\"",
+          "min_escape_single": "'a\\x01b'"
+        }
+      }
+    },
+    {
+      "name": "string_nbsp",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "a b",
+      "expected": {
+        "simple": "a b",
+        "literal": "\"a\\xa0b\"",
+        "spanner_cli": "a b",
+        "literal_quotes": {
+          "legacy_double": "\"a\\xa0b\"",
+          "legacy_single": "'a\\xa0b'",
+          "always_double": "\"a\\xa0b\"",
+          "always_single": "'a\\xa0b'",
+          "min_escape_double": "\"a\\xa0b\"",
+          "min_escape_single": "'a\\xa0b'"
+        }
+      }
+    },
+    {
+      "name": "string_zero_width_space",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "a​b",
+      "expected": {
+        "simple": "a​b",
+        "literal": "\"a\\u200bb\"",
+        "spanner_cli": "a​b",
+        "literal_quotes": {
+          "legacy_double": "\"a\\u200bb\"",
+          "legacy_single": "'a\\u200bb'",
+          "always_double": "\"a\\u200bb\"",
+          "always_single": "'a\\u200bb'",
+          "min_escape_double": "\"a\\u200bb\"",
+          "min_escape_single": "'a\\u200bb'"
+        }
+      }
+    },
+    {
+      "name": "string_combining_mark",
+      "type": {
+        "code": "STRING"
+      },
+      "value": "é",
+      "expected": {
+        "simple": "é",
+        "literal": "\"é\"",
+        "spanner_cli": "é",
+        "literal_quotes": {
+          "legacy_double": "\"é\"",
+          "legacy_single": "'é'",
+          "always_double": "\"é\"",
+          "always_single": "'é'",
+          "min_escape_double": "\"é\"",
+          "min_escape_single": "'é'"
+        }
+      }
+    },
+    {
+      "name": "string_null",
+      "type": {
+        "code": "STRING"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "bytes_empty",
+      "type": {
+        "code": "BYTES"
+      },
+      "value": "",
+      "expected": {
+        "simple": "",
+        "literal": "b\"\"",
+        "spanner_cli": "",
+        "literal_quotes": {
+          "legacy_double": "b\"\"",
+          "legacy_single": "b''",
+          "always_double": "b\"\"",
+          "always_single": "b''",
+          "min_escape_double": "b\"\"",
+          "min_escape_single": "b''"
+        }
+      }
+    },
+    {
+      "name": "bytes_ascii",
+      "type": {
+        "code": "BYTES"
+      },
+      "value": "YWJj",
+      "expected": {
+        "simple": "abc",
+        "literal": "b\"abc\"",
+        "spanner_cli": "YWJj",
+        "literal_quotes": {
+          "legacy_double": "b\"abc\"",
+          "legacy_single": "b'abc'",
+          "always_double": "b\"abc\"",
+          "always_single": "b'abc'",
+          "min_escape_double": "b\"abc\"",
+          "min_escape_single": "b'abc'"
+        }
+      }
+    },
+    {
+      "name": "bytes_quotes",
+      "type": {
+        "code": "BYTES"
+      },
+      "value": "JyI=",
+      "expected": {
+        "simple": "'\"",
+        "literal": "b\"'\\\"\"",
+        "spanner_cli": "JyI=",
+        "literal_quotes": {
+          "legacy_double": "b\"'\\\"\"",
+          "legacy_single": "b'\\'\"'",
+          "always_double": "b\"'\\\"\"",
+          "always_single": "b'\\'\"'",
+          "min_escape_double": "b\"'\\\"\"",
+          "min_escape_single": "b'\\'\"'"
+        }
+      }
+    },
+    {
+      "name": "bytes_binary",
+      "type": {
+        "code": "BYTES"
+      },
+      "value": "AAH/",
+      "expected": {
+        "simple": "\\x00\\x01\\xff",
+        "literal": "b\"\\x00\\x01\\xff\"",
+        "spanner_cli": "AAH/",
+        "literal_quotes": {
+          "legacy_double": "b\"\\x00\\x01\\xff\"",
+          "legacy_single": "b'\\x00\\x01\\xff'",
+          "always_double": "b\"\\x00\\x01\\xff\"",
+          "always_single": "b'\\x00\\x01\\xff'",
+          "min_escape_double": "b\"\\x00\\x01\\xff\"",
+          "min_escape_single": "b'\\x00\\x01\\xff'"
+        }
+      }
+    },
+    {
+      "name": "bytes_newline",
+      "type": {
+        "code": "BYTES"
+      },
+      "value": "YWJjCmRlZg==",
+      "expected": {
+        "simple": "abc\\x0adef",
+        "literal": "b\"abc\\x0adef\"",
+        "spanner_cli": "YWJjCmRlZg==",
+        "literal_quotes": {
+          "legacy_double": "b\"abc\\x0adef\"",
+          "legacy_single": "b'abc\\x0adef'",
+          "always_double": "b\"abc\\x0adef\"",
+          "always_single": "b'abc\\x0adef'",
+          "min_escape_double": "b\"abc\\x0adef\"",
+          "min_escape_single": "b'abc\\x0adef'"
+        }
+      }
+    },
+    {
+      "name": "bytes_backslash",
+      "type": {
+        "code": "BYTES"
+      },
+      "value": "YVxi",
+      "expected": {
+        "simple": "a\\\\b",
+        "literal": "b\"a\\\\b\"",
+        "spanner_cli": "YVxi",
+        "literal_quotes": {
+          "legacy_double": "b\"a\\\\b\"",
+          "legacy_single": "b'a\\\\b'",
+          "always_double": "b\"a\\\\b\"",
+          "always_single": "b'a\\\\b'",
+          "min_escape_double": "b\"a\\\\b\"",
+          "min_escape_single": "b'a\\\\b'"
+        }
+      }
+    },
+    {
+      "name": "bytes_null",
+      "type": {
+        "code": "BYTES"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "timestamp_nanos",
+      "type": {
+        "code": "TIMESTAMP"
+      },
+      "value": "2024-01-02T03:04:05.123456789Z",
+      "expected": {
+        "simple": "2024-01-02T03:04:05.123456789Z",
+        "literal": "TIMESTAMP \"2024-01-02T03:04:05.123456789Z\"",
+        "spanner_cli": "2024-01-02T03:04:05.123456789Z",
+        "literal_quotes": {
+          "legacy_double": "TIMESTAMP \"2024-01-02T03:04:05.123456789Z\"",
+          "legacy_single": "TIMESTAMP '2024-01-02T03:04:05.123456789Z'",
+          "always_double": "TIMESTAMP \"2024-01-02T03:04:05.123456789Z\"",
+          "always_single": "TIMESTAMP '2024-01-02T03:04:05.123456789Z'",
+          "min_escape_double": "TIMESTAMP \"2024-01-02T03:04:05.123456789Z\"",
+          "min_escape_single": "TIMESTAMP '2024-01-02T03:04:05.123456789Z'"
+        }
+      }
+    },
+    {
+      "name": "timestamp_seconds",
+      "type": {
+        "code": "TIMESTAMP"
+      },
+      "value": "2024-01-02T03:04:05Z",
+      "expected": {
+        "simple": "2024-01-02T03:04:05Z",
+        "literal": "TIMESTAMP \"2024-01-02T03:04:05Z\"",
+        "spanner_cli": "2024-01-02T03:04:05Z",
+        "literal_quotes": {
+          "legacy_double": "TIMESTAMP \"2024-01-02T03:04:05Z\"",
+          "legacy_single": "TIMESTAMP '2024-01-02T03:04:05Z'",
+          "always_double": "TIMESTAMP \"2024-01-02T03:04:05Z\"",
+          "always_single": "TIMESTAMP '2024-01-02T03:04:05Z'",
+          "min_escape_double": "TIMESTAMP \"2024-01-02T03:04:05Z\"",
+          "min_escape_single": "TIMESTAMP '2024-01-02T03:04:05Z'"
+        }
+      }
+    },
+    {
+      "name": "timestamp_null",
+      "type": {
+        "code": "TIMESTAMP"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "date",
+      "type": {
+        "code": "DATE"
+      },
+      "value": "2024-01-02",
+      "expected": {
+        "simple": "2024-01-02",
+        "literal": "DATE \"2024-01-02\"",
+        "spanner_cli": "2024-01-02",
+        "literal_quotes": {
+          "legacy_double": "DATE \"2024-01-02\"",
+          "legacy_single": "DATE '2024-01-02'",
+          "always_double": "DATE \"2024-01-02\"",
+          "always_single": "DATE '2024-01-02'",
+          "min_escape_double": "DATE \"2024-01-02\"",
+          "min_escape_single": "DATE '2024-01-02'"
+        }
+      }
+    },
+    {
+      "name": "date_null",
+      "type": {
+        "code": "DATE"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "numeric_pi",
+      "type": {
+        "code": "NUMERIC"
+      },
+      "value": "3.14",
+      "expected": {
+        "simple": "3.14",
+        "literal": "NUMERIC \"3.14\"",
+        "spanner_cli": "3.14",
+        "literal_quotes": {
+          "legacy_double": "NUMERIC \"3.14\"",
+          "legacy_single": "NUMERIC '3.14'",
+          "always_double": "NUMERIC \"3.14\"",
+          "always_single": "NUMERIC '3.14'",
+          "min_escape_double": "NUMERIC \"3.14\"",
+          "min_escape_single": "NUMERIC '3.14'"
+        }
+      }
+    },
+    {
+      "name": "numeric_trailing_zeros",
+      "type": {
+        "code": "NUMERIC"
+      },
+      "value": "-1.230000000",
+      "expected": {
+        "simple": "-1.230000000",
+        "literal": "NUMERIC \"-1.230000000\"",
+        "spanner_cli": "-1.23",
+        "literal_quotes": {
+          "legacy_double": "NUMERIC \"-1.230000000\"",
+          "legacy_single": "NUMERIC '-1.230000000'",
+          "always_double": "NUMERIC \"-1.230000000\"",
+          "always_single": "NUMERIC '-1.230000000'",
+          "min_escape_double": "NUMERIC \"-1.230000000\"",
+          "min_escape_single": "NUMERIC '-1.230000000'"
+        }
+      }
+    },
+    {
+      "name": "numeric_ten_point_zero",
+      "type": {
+        "code": "NUMERIC"
+      },
+      "value": "10.0",
+      "expected": {
+        "simple": "10.0",
+        "literal": "NUMERIC \"10.0\"",
+        "spanner_cli": "10",
+        "literal_quotes": {
+          "legacy_double": "NUMERIC \"10.0\"",
+          "legacy_single": "NUMERIC '10.0'",
+          "always_double": "NUMERIC \"10.0\"",
+          "always_single": "NUMERIC '10.0'",
+          "min_escape_double": "NUMERIC \"10.0\"",
+          "min_escape_single": "NUMERIC '10.0'"
+        }
+      }
+    },
+    {
+      "name": "numeric_integer",
+      "type": {
+        "code": "NUMERIC"
+      },
+      "value": "10",
+      "expected": {
+        "simple": "10",
+        "literal": "NUMERIC \"10\"",
+        "spanner_cli": "10",
+        "literal_quotes": {
+          "legacy_double": "NUMERIC \"10\"",
+          "legacy_single": "NUMERIC '10'",
+          "always_double": "NUMERIC \"10\"",
+          "always_single": "NUMERIC '10'",
+          "min_escape_double": "NUMERIC \"10\"",
+          "min_escape_single": "NUMERIC '10'"
+        }
+      }
+    },
+    {
+      "name": "numeric_small",
+      "type": {
+        "code": "NUMERIC"
+      },
+      "value": "0.000000001",
+      "expected": {
+        "simple": "0.000000001",
+        "literal": "NUMERIC \"0.000000001\"",
+        "spanner_cli": "0.000000001",
+        "literal_quotes": {
+          "legacy_double": "NUMERIC \"0.000000001\"",
+          "legacy_single": "NUMERIC '0.000000001'",
+          "always_double": "NUMERIC \"0.000000001\"",
+          "always_single": "NUMERIC '0.000000001'",
+          "min_escape_double": "NUMERIC \"0.000000001\"",
+          "min_escape_single": "NUMERIC '0.000000001'"
+        }
+      }
+    },
+    {
+      "name": "numeric_null",
+      "type": {
+        "code": "NUMERIC"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "pg_numeric",
+      "type": {
+        "code": "NUMERIC",
+        "typeAnnotation": "PG_NUMERIC"
+      },
+      "value": "3.140",
+      "expected": {
+        "simple": "3.140",
+        "literal": "NUMERIC \"3.140\"",
+        "spanner_cli": "3.14",
+        "literal_quotes": {
+          "legacy_double": "NUMERIC \"3.140\"",
+          "legacy_single": "NUMERIC '3.140'",
+          "always_double": "NUMERIC \"3.140\"",
+          "always_single": "NUMERIC '3.140'",
+          "min_escape_double": "NUMERIC \"3.140\"",
+          "min_escape_single": "NUMERIC '3.140'"
+        }
+      }
+    },
+    {
+      "name": "pg_numeric_nan",
+      "type": {
+        "code": "NUMERIC",
+        "typeAnnotation": "PG_NUMERIC"
+      },
+      "value": "NaN",
+      "expected": {
+        "simple": "NaN",
+        "literal": "NUMERIC \"NaN\"",
+        "spanner_cli": "NaN",
+        "literal_quotes": {
+          "legacy_double": "NUMERIC \"NaN\"",
+          "legacy_single": "NUMERIC 'NaN'",
+          "always_double": "NUMERIC \"NaN\"",
+          "always_single": "NUMERIC 'NaN'",
+          "min_escape_double": "NUMERIC \"NaN\"",
+          "min_escape_single": "NUMERIC 'NaN'"
+        }
+      }
+    },
+    {
+      "name": "pg_numeric_null",
+      "type": {
+        "code": "NUMERIC",
+        "typeAnnotation": "PG_NUMERIC"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "json_object",
+      "type": {
+        "code": "JSON"
+      },
+      "value": "{\"a\":1}",
+      "expected": {
+        "simple": "{\"a\":1}",
+        "literal": "JSON '{\"a\":1}'",
+        "spanner_cli": "{\"a\":1}",
+        "literal_quotes": {
+          "legacy_double": "JSON '{\"a\":1}'",
+          "legacy_single": "JSON '{\"a\":1}'",
+          "always_double": "JSON \"{\\\"a\\\":1}\"",
+          "always_single": "JSON '{\"a\":1}'",
+          "min_escape_double": "JSON '{\"a\":1}'",
+          "min_escape_single": "JSON '{\"a\":1}'"
+        }
+      }
+    },
+    {
+      "name": "json_array",
+      "type": {
+        "code": "JSON"
+      },
+      "value": "[1,2,3]",
+      "expected": {
+        "simple": "[1,2,3]",
+        "literal": "JSON \"[1,2,3]\"",
+        "spanner_cli": "[1,2,3]",
+        "literal_quotes": {
+          "legacy_double": "JSON \"[1,2,3]\"",
+          "legacy_single": "JSON '[1,2,3]'",
+          "always_double": "JSON \"[1,2,3]\"",
+          "always_single": "JSON '[1,2,3]'",
+          "min_escape_double": "JSON \"[1,2,3]\"",
+          "min_escape_single": "JSON '[1,2,3]'"
+        }
+      }
+    },
+    {
+      "name": "json_string",
+      "type": {
+        "code": "JSON"
+      },
+      "value": "\"str\"",
+      "expected": {
+        "simple": "\"str\"",
+        "literal": "JSON '\"str\"'",
+        "spanner_cli": "\"str\"",
+        "literal_quotes": {
+          "legacy_double": "JSON '\"str\"'",
+          "legacy_single": "JSON '\"str\"'",
+          "always_double": "JSON \"\\\"str\\\"\"",
+          "always_single": "JSON '\"str\"'",
+          "min_escape_double": "JSON '\"str\"'",
+          "min_escape_single": "JSON '\"str\"'"
+        }
+      }
+    },
+    {
+      "name": "json_json_null",
+      "type": {
+        "code": "JSON"
+      },
+      "value": "null",
+      "expected": {
+        "simple": "null",
+        "literal": "JSON \"null\"",
+        "spanner_cli": "null",
+        "literal_quotes": {
+          "legacy_double": "JSON \"null\"",
+          "legacy_single": "JSON 'null'",
+          "always_double": "JSON \"null\"",
+          "always_single": "JSON 'null'",
+          "min_escape_double": "JSON \"null\"",
+          "min_escape_single": "JSON 'null'"
+        }
+      }
+    },
+    {
+      "name": "json_null",
+      "type": {
+        "code": "JSON"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "pg_jsonb",
+      "type": {
+        "code": "JSON",
+        "typeAnnotation": "PG_JSONB"
+      },
+      "value": "{\"b\": 2}",
+      "expected": {
+        "simple": "{\"b\": 2}",
+        "literal": "JSON '{\"b\": 2}'",
+        "spanner_cli": "{\"b\": 2}",
+        "literal_quotes": {
+          "legacy_double": "JSON '{\"b\": 2}'",
+          "legacy_single": "JSON '{\"b\": 2}'",
+          "always_double": "JSON \"{\\\"b\\\": 2}\"",
+          "always_single": "JSON '{\"b\": 2}'",
+          "min_escape_double": "JSON '{\"b\": 2}'",
+          "min_escape_single": "JSON '{\"b\": 2}'"
+        }
+      }
+    },
+    {
+      "name": "interval",
+      "type": {
+        "code": "INTERVAL"
+      },
+      "value": "P1Y2M3DT4H5M6.789S",
+      "expected": {
+        "simple": "P1Y2M3DT4H5M6.789S",
+        "literal": "CAST(\"P1Y2M3DT4H5M6.789S\" AS INTERVAL)",
+        "spanner_cli": "P1Y2M3DT4H5M6.789S",
+        "literal_quotes": {
+          "legacy_double": "CAST(\"P1Y2M3DT4H5M6.789S\" AS INTERVAL)",
+          "legacy_single": "CAST('P1Y2M3DT4H5M6.789S' AS INTERVAL)",
+          "always_double": "CAST(\"P1Y2M3DT4H5M6.789S\" AS INTERVAL)",
+          "always_single": "CAST('P1Y2M3DT4H5M6.789S' AS INTERVAL)",
+          "min_escape_double": "CAST(\"P1Y2M3DT4H5M6.789S\" AS INTERVAL)",
+          "min_escape_single": "CAST('P1Y2M3DT4H5M6.789S' AS INTERVAL)"
+        }
+      }
+    },
+    {
+      "name": "interval_null",
+      "type": {
+        "code": "INTERVAL"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "uuid",
+      "type": {
+        "code": "UUID"
+      },
+      "value": "01234567-89ab-cdef-0123-456789abcdef",
+      "expected": {
+        "simple": "01234567-89ab-cdef-0123-456789abcdef",
+        "literal": "CAST(\"01234567-89ab-cdef-0123-456789abcdef\" AS UUID)",
+        "spanner_cli": "01234567-89ab-cdef-0123-456789abcdef",
+        "literal_quotes": {
+          "legacy_double": "CAST(\"01234567-89ab-cdef-0123-456789abcdef\" AS UUID)",
+          "legacy_single": "CAST('01234567-89ab-cdef-0123-456789abcdef' AS UUID)",
+          "always_double": "CAST(\"01234567-89ab-cdef-0123-456789abcdef\" AS UUID)",
+          "always_single": "CAST('01234567-89ab-cdef-0123-456789abcdef' AS UUID)",
+          "min_escape_double": "CAST(\"01234567-89ab-cdef-0123-456789abcdef\" AS UUID)",
+          "min_escape_single": "CAST('01234567-89ab-cdef-0123-456789abcdef' AS UUID)"
+        }
+      }
+    },
+    {
+      "name": "uuid_null",
+      "type": {
+        "code": "UUID"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "enum",
+      "type": {
+        "code": "ENUM",
+        "protoTypeFqn": "examples.Genre"
+      },
+      "value": "42",
+      "expected": {
+        "simple": "42",
+        "literal": "CAST(42 AS `examples.Genre`)",
+        "spanner_cli": "42",
+        "literal_quotes": {
+          "legacy_double": "CAST(42 AS `examples.Genre`)",
+          "legacy_single": "CAST(42 AS `examples.Genre`)",
+          "always_double": "CAST(42 AS `examples.Genre`)",
+          "always_single": "CAST(42 AS `examples.Genre`)",
+          "min_escape_double": "CAST(42 AS `examples.Genre`)",
+          "min_escape_single": "CAST(42 AS `examples.Genre`)"
+        }
+      }
+    },
+    {
+      "name": "enum_null",
+      "type": {
+        "code": "ENUM",
+        "protoTypeFqn": "examples.Genre"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "proto",
+      "type": {
+        "code": "PROTO",
+        "protoTypeFqn": "examples.Book"
+      },
+      "value": "CJYB",
+      "expected": {
+        "simple": "\\x08\\x96\\x01",
+        "literal": "CAST(b\"\\x08\\x96\\x01\" AS `examples.Book`)",
+        "spanner_cli": "CJYB",
+        "literal_quotes": {
+          "legacy_double": "CAST(b\"\\x08\\x96\\x01\" AS `examples.Book`)",
+          "legacy_single": "CAST(b'\\x08\\x96\\x01' AS `examples.Book`)",
+          "always_double": "CAST(b\"\\x08\\x96\\x01\" AS `examples.Book`)",
+          "always_single": "CAST(b'\\x08\\x96\\x01' AS `examples.Book`)",
+          "min_escape_double": "CAST(b\"\\x08\\x96\\x01\" AS `examples.Book`)",
+          "min_escape_single": "CAST(b'\\x08\\x96\\x01' AS `examples.Book`)"
+        }
+      }
+    },
+    {
+      "name": "proto_readable",
+      "type": {
+        "code": "PROTO",
+        "protoTypeFqn": "examples.Book"
+      },
+      "value": "YWJj",
+      "expected": {
+        "simple": "abc",
+        "literal": "CAST(b\"abc\" AS `examples.Book`)",
+        "spanner_cli": "YWJj",
+        "literal_quotes": {
+          "legacy_double": "CAST(b\"abc\" AS `examples.Book`)",
+          "legacy_single": "CAST(b'abc' AS `examples.Book`)",
+          "always_double": "CAST(b\"abc\" AS `examples.Book`)",
+          "always_single": "CAST(b'abc' AS `examples.Book`)",
+          "min_escape_double": "CAST(b\"abc\" AS `examples.Book`)",
+          "min_escape_single": "CAST(b'abc' AS `examples.Book`)"
+        }
+      }
+    },
+    {
+      "name": "proto_null",
+      "type": {
+        "code": "PROTO",
+        "protoTypeFqn": "examples.Book"
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "array_int64",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "INT64"
+        }
+      },
+      "value": [
+        "1",
+        "2",
+        "3"
+      ],
+      "expected": {
+        "simple": "[1, 2, 3]",
+        "literal": "[1, 2, 3]",
+        "spanner_cli": "[1, 2, 3]",
+        "literal_quotes": {
+          "legacy_double": "[1, 2, 3]",
+          "legacy_single": "[1, 2, 3]",
+          "always_double": "[1, 2, 3]",
+          "always_single": "[1, 2, 3]",
+          "min_escape_double": "[1, 2, 3]",
+          "min_escape_single": "[1, 2, 3]"
+        }
+      }
+    },
+    {
+      "name": "array_int64_empty",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "INT64"
+        }
+      },
+      "value": [],
+      "expected": {
+        "simple": "[]",
+        "literal": "[]",
+        "spanner_cli": "[]",
+        "literal_quotes": {
+          "legacy_double": "[]",
+          "legacy_single": "[]",
+          "always_double": "[]",
+          "always_single": "[]",
+          "min_escape_double": "[]",
+          "min_escape_single": "[]"
+        }
+      }
+    },
+    {
+      "name": "array_int64_with_null",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "INT64"
+        }
+      },
+      "value": [
+        "1",
+        null
+      ],
+      "expected": {
+        "simple": "[1, \u003cnull\u003e]",
+        "literal": "[1, NULL]",
+        "spanner_cli": "[1, NULL]",
+        "literal_quotes": {
+          "legacy_double": "[1, NULL]",
+          "legacy_single": "[1, NULL]",
+          "always_double": "[1, NULL]",
+          "always_single": "[1, NULL]",
+          "min_escape_double": "[1, NULL]",
+          "min_escape_single": "[1, NULL]"
+        }
+      }
+    },
+    {
+      "name": "array_int64_null",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "INT64"
+        }
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "array_string",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "STRING"
+        }
+      },
+      "value": [
+        "a",
+        "b\"c"
+      ],
+      "expected": {
+        "simple": "[a, b\"c]",
+        "literal": "[\"a\", 'b\"c']",
+        "spanner_cli": "[a, b\"c]",
+        "literal_quotes": {
+          "legacy_double": "[\"a\", 'b\"c']",
+          "legacy_single": "['a', 'b\"c']",
+          "always_double": "[\"a\", \"b\\\"c\"]",
+          "always_single": "['a', 'b\"c']",
+          "min_escape_double": "[\"a\", 'b\"c']",
+          "min_escape_single": "['a', 'b\"c']"
+        }
+      }
+    },
+    {
+      "name": "array_bytes",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "BYTES"
+        }
+      },
+      "value": [
+        "AA==",
+        "b2s="
+      ],
+      "expected": {
+        "simple": "[\\x00, ok]",
+        "literal": "[b\"\\x00\", b\"ok\"]",
+        "spanner_cli": "[AA==, b2s=]",
+        "literal_quotes": {
+          "legacy_double": "[b\"\\x00\", b\"ok\"]",
+          "legacy_single": "[b'\\x00', b'ok']",
+          "always_double": "[b\"\\x00\", b\"ok\"]",
+          "always_single": "[b'\\x00', b'ok']",
+          "min_escape_double": "[b\"\\x00\", b\"ok\"]",
+          "min_escape_single": "[b'\\x00', b'ok']"
+        }
+      }
+    },
+    {
+      "name": "array_float64_nonfinite",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "FLOAT64"
+        }
+      },
+      "value": [
+        "NaN",
+        "Infinity",
+        "-Infinity",
+        1.5
+      ],
+      "expected": {
+        "simple": "[NaN, +Inf, -Inf, 1.5]",
+        "literal": "[CAST(\"nan\" AS FLOAT64), CAST(\"inf\" AS FLOAT64), CAST(\"-inf\" AS FLOAT64), 1.5]",
+        "spanner_cli": "[NaN, +Inf, -Inf, 1.500000]",
+        "literal_quotes": {
+          "legacy_double": "[CAST(\"nan\" AS FLOAT64), CAST(\"inf\" AS FLOAT64), CAST(\"-inf\" AS FLOAT64), 1.5]",
+          "legacy_single": "[CAST('nan' AS FLOAT64), CAST('inf' AS FLOAT64), CAST('-inf' AS FLOAT64), 1.5]",
+          "always_double": "[CAST(\"nan\" AS FLOAT64), CAST(\"inf\" AS FLOAT64), CAST(\"-inf\" AS FLOAT64), 1.5]",
+          "always_single": "[CAST('nan' AS FLOAT64), CAST('inf' AS FLOAT64), CAST('-inf' AS FLOAT64), 1.5]",
+          "min_escape_double": "[CAST(\"nan\" AS FLOAT64), CAST(\"inf\" AS FLOAT64), CAST(\"-inf\" AS FLOAT64), 1.5]",
+          "min_escape_single": "[CAST('nan' AS FLOAT64), CAST('inf' AS FLOAT64), CAST('-inf' AS FLOAT64), 1.5]"
+        }
+      }
+    },
+    {
+      "name": "array_enum",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "ENUM",
+          "protoTypeFqn": "examples.Genre"
+        }
+      },
+      "value": [
+        "1",
+        null
+      ],
+      "expected": {
+        "simple": "[1, \u003cnull\u003e]",
+        "literal": "[CAST(1 AS `examples.Genre`), NULL]",
+        "spanner_cli": "[1, NULL]",
+        "literal_quotes": {
+          "legacy_double": "[CAST(1 AS `examples.Genre`), NULL]",
+          "legacy_single": "[CAST(1 AS `examples.Genre`), NULL]",
+          "always_double": "[CAST(1 AS `examples.Genre`), NULL]",
+          "always_single": "[CAST(1 AS `examples.Genre`), NULL]",
+          "min_escape_double": "[CAST(1 AS `examples.Genre`), NULL]",
+          "min_escape_single": "[CAST(1 AS `examples.Genre`), NULL]"
+        }
+      }
+    },
+    {
+      "name": "array_struct",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "STRUCT",
+          "structType": {
+            "fields": [
+              {
+                "name": "n",
+                "type": {
+                  "code": "INT64"
+                }
+              },
+              {
+                "name": "region",
+                "type": {
+                  "code": "STRING"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "value": [
+        [
+          "1",
+          "east"
+        ]
+      ],
+      "expected": {
+        "simple": "[(1 AS n, east AS region)]",
+        "literal": "ARRAY\u003cSTRUCT\u003cn INT64, region STRING\u003e\u003e[(1, \"east\")]",
+        "spanner_cli": "[[1, east]]",
+        "literal_quotes": {
+          "legacy_double": "ARRAY\u003cSTRUCT\u003cn INT64, region STRING\u003e\u003e[(1, \"east\")]",
+          "legacy_single": "ARRAY\u003cSTRUCT\u003cn INT64, region STRING\u003e\u003e[(1, 'east')]",
+          "always_double": "ARRAY\u003cSTRUCT\u003cn INT64, region STRING\u003e\u003e[(1, \"east\")]",
+          "always_single": "ARRAY\u003cSTRUCT\u003cn INT64, region STRING\u003e\u003e[(1, 'east')]",
+          "min_escape_double": "ARRAY\u003cSTRUCT\u003cn INT64, region STRING\u003e\u003e[(1, \"east\")]",
+          "min_escape_single": "ARRAY\u003cSTRUCT\u003cn INT64, region STRING\u003e\u003e[(1, 'east')]"
+        }
+      }
+    },
+    {
+      "name": "array_struct_empty",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "STRUCT",
+          "structType": {
+            "fields": [
+              {
+                "name": "n",
+                "type": {
+                  "code": "INT64"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "value": [],
+      "expected": {
+        "simple": "[]",
+        "literal": "ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e[]",
+        "spanner_cli": "[]",
+        "literal_quotes": {
+          "legacy_double": "ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e[]",
+          "legacy_single": "ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e[]",
+          "always_double": "ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e[]",
+          "always_single": "ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e[]",
+          "min_escape_double": "ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e[]",
+          "min_escape_single": "ARRAY\u003cSTRUCT\u003cn INT64\u003e\u003e[]"
+        }
+      }
+    },
+    {
+      "name": "array_array_int64",
+      "type": {
+        "code": "ARRAY",
+        "arrayElementType": {
+          "code": "ARRAY",
+          "arrayElementType": {
+            "code": "INT64"
+          }
+        }
+      },
+      "value": [
+        [
+          "1",
+          "2"
+        ],
+        null
+      ],
+      "expected": {
+        "simple": "[[1, 2], \u003cnull\u003e]",
+        "literal": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e[[1, 2], NULL]",
+        "spanner_cli": "[[1, 2], NULL]",
+        "literal_quotes": {
+          "legacy_double": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e[[1, 2], NULL]",
+          "legacy_single": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e[[1, 2], NULL]",
+          "always_double": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e[[1, 2], NULL]",
+          "always_single": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e[[1, 2], NULL]",
+          "min_escape_double": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e[[1, 2], NULL]",
+          "min_escape_single": "ARRAY\u003cARRAY\u003cINT64\u003e\u003e[[1, 2], NULL]"
+        }
+      }
+    },
+    {
+      "name": "struct_named",
+      "type": {
+        "code": "STRUCT",
+        "structType": {
+          "fields": [
+            {
+              "name": "n",
+              "type": {
+                "code": "INT64"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "code": "STRING"
+              }
+            }
+          ]
+        }
+      },
+      "value": [
+        "1",
+        "foo"
+      ],
+      "expected": {
+        "simple": "(1 AS n, foo AS s)",
+        "literal": "STRUCT\u003cn INT64, s STRING\u003e(1, \"foo\")",
+        "spanner_cli": "[1, foo]",
+        "literal_quotes": {
+          "legacy_double": "STRUCT\u003cn INT64, s STRING\u003e(1, \"foo\")",
+          "legacy_single": "STRUCT\u003cn INT64, s STRING\u003e(1, 'foo')",
+          "always_double": "STRUCT\u003cn INT64, s STRING\u003e(1, \"foo\")",
+          "always_single": "STRUCT\u003cn INT64, s STRING\u003e(1, 'foo')",
+          "min_escape_double": "STRUCT\u003cn INT64, s STRING\u003e(1, \"foo\")",
+          "min_escape_single": "STRUCT\u003cn INT64, s STRING\u003e(1, 'foo')"
+        }
+      }
+    },
+    {
+      "name": "struct_unnamed",
+      "type": {
+        "code": "STRUCT",
+        "structType": {
+          "fields": [
+            {
+              "type": {
+                "code": "INT64"
+              }
+            },
+            {
+              "type": {
+                "code": "STRING"
+              }
+            }
+          ]
+        }
+      },
+      "value": [
+        "1",
+        "foo"
+      ],
+      "expected": {
+        "simple": "(1, foo)",
+        "literal": "STRUCT\u003cINT64, STRING\u003e(1, \"foo\")",
+        "spanner_cli": "[1, foo]",
+        "literal_quotes": {
+          "legacy_double": "STRUCT\u003cINT64, STRING\u003e(1, \"foo\")",
+          "legacy_single": "STRUCT\u003cINT64, STRING\u003e(1, 'foo')",
+          "always_double": "STRUCT\u003cINT64, STRING\u003e(1, \"foo\")",
+          "always_single": "STRUCT\u003cINT64, STRING\u003e(1, 'foo')",
+          "min_escape_double": "STRUCT\u003cINT64, STRING\u003e(1, \"foo\")",
+          "min_escape_single": "STRUCT\u003cINT64, STRING\u003e(1, 'foo')"
+        }
+      }
+    },
+    {
+      "name": "struct_empty",
+      "type": {
+        "code": "STRUCT",
+        "structType": {}
+      },
+      "value": [],
+      "expected": {
+        "simple": "()",
+        "literal": "STRUCT\u003c\u003e()",
+        "spanner_cli": "[]",
+        "literal_quotes": {
+          "legacy_double": "STRUCT\u003c\u003e()",
+          "legacy_single": "STRUCT\u003c\u003e()",
+          "always_double": "STRUCT\u003c\u003e()",
+          "always_single": "STRUCT\u003c\u003e()",
+          "min_escape_double": "STRUCT\u003c\u003e()",
+          "min_escape_single": "STRUCT\u003c\u003e()"
+        }
+      }
+    },
+    {
+      "name": "struct_null",
+      "type": {
+        "code": "STRUCT",
+        "structType": {
+          "fields": [
+            {
+              "name": "n",
+              "type": {
+                "code": "INT64"
+              }
+            }
+          ]
+        }
+      },
+      "value": null,
+      "expected": {
+        "simple": "\u003cnull\u003e",
+        "literal": "NULL",
+        "spanner_cli": "NULL",
+        "literal_quotes": {
+          "legacy_double": "NULL",
+          "legacy_single": "NULL",
+          "always_double": "NULL",
+          "always_single": "NULL",
+          "min_escape_double": "NULL",
+          "min_escape_single": "NULL"
+        }
+      }
+    },
+    {
+      "name": "struct_with_null_field",
+      "type": {
+        "code": "STRUCT",
+        "structType": {
+          "fields": [
+            {
+              "name": "n",
+              "type": {
+                "code": "INT64"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "code": "STRING"
+              }
+            }
+          ]
+        }
+      },
+      "value": [
+        null,
+        "x"
+      ],
+      "expected": {
+        "simple": "(\u003cnull\u003e AS n, x AS s)",
+        "literal": "STRUCT\u003cn INT64, s STRING\u003e(NULL, \"x\")",
+        "spanner_cli": "[NULL, x]",
+        "literal_quotes": {
+          "legacy_double": "STRUCT\u003cn INT64, s STRING\u003e(NULL, \"x\")",
+          "legacy_single": "STRUCT\u003cn INT64, s STRING\u003e(NULL, 'x')",
+          "always_double": "STRUCT\u003cn INT64, s STRING\u003e(NULL, \"x\")",
+          "always_single": "STRUCT\u003cn INT64, s STRING\u003e(NULL, 'x')",
+          "min_escape_double": "STRUCT\u003cn INT64, s STRING\u003e(NULL, \"x\")",
+          "min_escape_single": "STRUCT\u003cn INT64, s STRING\u003e(NULL, 'x')"
+        }
+      }
+    },
+    {
+      "name": "struct_nested",
+      "type": {
+        "code": "STRUCT",
+        "structType": {
+          "fields": [
+            {
+              "name": "arr",
+              "type": {
+                "code": "ARRAY",
+                "arrayElementType": {
+                  "code": "INT64"
+                }
+              }
+            },
+            {
+              "name": "inner",
+              "type": {
+                "code": "STRUCT",
+                "structType": {
+                  "fields": [
+                    {
+                      "name": "b",
+                      "type": {
+                        "code": "BOOL"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "value": [
+        [
+          "10",
+          "20"
+        ],
+        [
+          true
+        ]
+      ],
+      "expected": {
+        "simple": "([10, 20] AS arr, (true AS b) AS inner)",
+        "literal": "STRUCT\u003carr ARRAY\u003cINT64\u003e, inner STRUCT\u003cb BOOL\u003e\u003e([10, 20], (true))",
+        "spanner_cli": "[[10, 20], [true]]",
+        "literal_quotes": {
+          "legacy_double": "STRUCT\u003carr ARRAY\u003cINT64\u003e, inner STRUCT\u003cb BOOL\u003e\u003e([10, 20], (true))",
+          "legacy_single": "STRUCT\u003carr ARRAY\u003cINT64\u003e, inner STRUCT\u003cb BOOL\u003e\u003e([10, 20], (true))",
+          "always_double": "STRUCT\u003carr ARRAY\u003cINT64\u003e, inner STRUCT\u003cb BOOL\u003e\u003e([10, 20], (true))",
+          "always_single": "STRUCT\u003carr ARRAY\u003cINT64\u003e, inner STRUCT\u003cb BOOL\u003e\u003e([10, 20], (true))",
+          "min_escape_double": "STRUCT\u003carr ARRAY\u003cINT64\u003e, inner STRUCT\u003cb BOOL\u003e\u003e([10, 20], (true))",
+          "min_escape_single": "STRUCT\u003carr ARRAY\u003cINT64\u003e, inner STRUCT\u003cb BOOL\u003e\u003e([10, 20], (true))"
+        }
+      }
+    }
+  ]
+}
