@@ -83,6 +83,12 @@ function encode_value(mixed $type, mixed $nativeValue): mixed
     return Encoder::encodeValue($type, $nativeValue);
 }
 
+/** @return array<string, mixed> */
+function adapt_client_type(mixed $clientType): array
+{
+    return ClientTypeAdapter::adapt($clientType);
+}
+
 /** @param list<mixed> $types @param list<mixed> $nativeValues @return list<string> */
 function format_result_row(array $types, array $nativeValues, FormatConfig $config): array
 {

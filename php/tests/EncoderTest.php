@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Apstndb\SpanValue\Tests;
 
+use Apstndb\SpanValue\ClientTypeAdapter;
 use Apstndb\SpanValue\Encoder;
 use Apstndb\SpanValue\ValueFormat;
 use PHPUnit\Framework\TestCase;
@@ -72,6 +73,43 @@ final class EncoderTest extends TestCase
                 . ' want ' . var_export($want, true)
             );
         }
+    }
+
+    public function testAdaptClientType(): void
+    {
+        $client = [
+            'code' => 'ARRAY',
+            'arrayElementType' => ['code' => 'INT64'],
+        ];
+        self::assertSame(
+            ['code' => 'ARRAY', 'arrayElementType' => ['code' => 'INT64']],
+            ClientTypeAdapter::adapt($client)
+        );
+    }
+
+    public function testAdaptClientTypeNestedStruct(): void
+    {
+        $client = [
+            'code' => 'STRUCT',
+            'structType' => [
+                'fields' => [
+                    ['name' => 'n', 'type' => ['code' => 'INT64']],
+                    ['name' => 's', 'type' => ['code' => 'STRING']],
+                ],
+            ],
+        ];
+        self::assertSame(
+            [
+                'code' => 'STRUCT',
+                'structType' => [
+                    'fields' => [
+                        ['name' => 'n', 'type' => ['code' => 'INT64']],
+                        ['name' => 's', 'type' => ['code' => 'STRING']],
+                    ],
+                ],
+            ],
+            ClientTypeAdapter::adapt($client)
+        );
     }
 
     public function testFormatResultRow(): void

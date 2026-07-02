@@ -11,10 +11,6 @@ requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "apstndb" }]
 keywords = ["spanner", "google-cloud", "formatting"]
-
-[project.urls]
-Homepage = "https://github.com/apstndb/spanformat-multilang"
-Repository = "https://github.com/apstndb/spanformat-multilang"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -26,6 +22,10 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Topic :: Database",
 ]
+
+[project.urls]
+Homepage = "https://github.com/apstndb/spanformat-multilang"
+Repository = "https://github.com/apstndb/spanformat-multilang"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]
