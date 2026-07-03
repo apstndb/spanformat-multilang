@@ -77,5 +77,6 @@ Adapters are best-effort; wire protojson dicts remain the universal fallback.
 
 ## Out of scope (P5)
 
-Descriptor-aware PROTO/ENUM display (`protofmt`) is lower priority; encoders
-only need FQN + bytes/int wire forms.
+Descriptor-aware PROTO/ENUM **value display** (`protofmt`) is lower priority for
+encoder work; encoders only need FQN + bytes/int wire forms. Design for the
+optional display layer is in [`spec/PROTOFMT.md`](PROTOFMT.md).

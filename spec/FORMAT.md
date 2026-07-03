@@ -10,6 +10,11 @@ implementation via `tools/gen-testdata`) wins.
 
 Implementations MUST pass every case in `testdata/conformance.json`.
 
+Descriptor-aware PROTO/ENUM **value** display (enum names, protobuf text format)
+is an **optional** layer documented in [`spec/PROTOFMT.md`](PROTOFMT.md). It does
+not change the normative wire-based rules in §3.4 below or the expectations in
+`testdata/conformance.json`.
+
 ## 1. Input model
 
 Formatting is defined on the Cloud Spanner wire representation, which every
