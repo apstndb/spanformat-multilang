@@ -7,6 +7,7 @@ pub mod errors;
 pub mod float_fmt;
 pub mod format_config;
 pub mod proto_adapt;
+pub mod protojson;
 pub mod quote;
 pub mod type_format;
 pub mod types;
@@ -34,6 +35,7 @@ pub use encoder::{
 pub use proto_adapt::{
     adapt_type, format_value_like, TypeLike, ValueLike,
 };
+pub use protojson::{type_from_protojson, value_from_protojson};
 pub use quote::{
     escape_rune, normalize_literal_quote, sql_cast_quoted, to_bytes_literal, to_string_literal,
     LiteralQuoteConfig, PreferredQuote, QuoteStrategy,

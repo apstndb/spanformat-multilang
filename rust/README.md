@@ -5,7 +5,7 @@ Format Cloud Spanner `google.spanner.v1.Type` values and column wire values
 literals, or byte-for-byte [spanner-cli](https://github.com/cloudspannerecosystem/spanner-cli)
 compatible output.
 
-Zero runtime dependencies. Rust stable.
+Zero runtime dependencies beyond `serde_json` (protojson parsing). Rust stable.
 
 ## Input model
 
@@ -16,8 +16,9 @@ The public API accepts **native Rust types**:
 
 Protobuf-shaped types can implement [`TypeLike`](src/proto_adapt.rs) /
 [`ValueLike`](src/proto_adapt.rs) (no `prost` dependency) and use
-`format_value_like`. Conformance tests use `serde_json` internally to parse
-protojson into `Type`/`Value`.
+`format_value_like`. Protojson dicts can be parsed with
+[`type_from_protojson`](src/protojson.rs) / [`value_from_protojson`](src/protojson.rs).
+Conformance tests use these helpers against shared `testdata/conformance.json`.
 
 High-level client row values are not supported — use the encoder below or
 convert to wire form first.

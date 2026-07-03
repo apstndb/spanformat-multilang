@@ -119,6 +119,8 @@ CI runs all of the above on every push and pull request to `main`.
 
 Runnable demos that query the [Spanner emulator](https://cloud.google.com/spanner/docs/emulator) with each official client library and format results via `encode_value` / `adapt_client_type` / `format_result_row` are in [`examples/`](examples/). See [`examples/README.md`](examples/README.md) for setup and one-liner run commands.
 
+For a per-language walkthrough of client APIs, metadata timing, and pitfalls, see **[`docs/CLIENT_INTEGRATION.md`](docs/CLIENT_INTEGRATION.md)** (Japanese).
+
 ## How consistency is enforced
 
 - [`spec/FORMAT.md`](spec/FORMAT.md) is the normative specification for both

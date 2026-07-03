@@ -79,7 +79,7 @@ format_result_row: ["1", "hello", "true"]
 - **Python / Node / Ruby / PHP** — column types from official client result metadata (`row_type.fields` or equivalent).
 - **Java** — `ResultSet#getValue` returns wire protobuf `Value`; use typed accessors (`getLong`, `getString`, `getBoolean`, …) for native values passed to `encodeValue`.
 - **C#** — set `EmulatorDetection = EmulatorOnly` and `EnableGetSchemaTable = true` on `SpannerConnectionStringBuilder`; read `SpannerDbType` from `GetSchemaTable()` and use typed `SpannerDataReader` accessors.
-- **Rust** — uses `google-cloud-spanner` with `NativeValue` wrappers for column values.
+- **Rust** — uses `google-cloud-spanner` with `metadata().column_types()` and `row.try_get`; see [`docs/CLIENT_INTEGRATION.md`](../docs/CLIENT_INTEGRATION.md) for STRUCT limitations.
 - **C++** — the high-level `RowStream` does not expose `ResultSetMetadata`; the example documents wire types equivalent to metadata for this fixed `SELECT` and still runs the query through `google::cloud::spanner::Client`.
 - **C++** — install [google-cloud-cpp](https://github.com/googleapis/google-cloud-cpp) Spanner via [vcpkg](https://vcpkg.io/) (`vcpkg.json` in `examples/cpp/`). See [`cpp/README.md`](cpp/README.md).
 - **PHP** — requires `ext-grpc` and `ext-intl`; install steps for macOS in [`php/README.md`](php/README.md).
